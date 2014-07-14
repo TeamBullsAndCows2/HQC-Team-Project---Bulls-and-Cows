@@ -1,0 +1,7 @@
+D:\University\Telerik\KPK\TeamProject\bin\Debug\BullsAndCowsGame.exe
+D:\University\Telerik\KPK\TeamProject\bin\Debug\BullsAndCowsGame.pdb
+D:\University\Telerik\KPK\TeamProject\obj\x86\Debug\bikove.csprojResolveAssemblyReference.cache
+D:\University\Telerik\KPK\TeamProject\obj\x86\Debug\BullsAndCowsGame.exe
+D:\University\Telerik\KPK\TeamProject\obj\x86\Debug\BullsAndCowsGame.pdb
+C:\Users\Stef\Documents\GitHub\HQC-Team-Project---Bulls-and-Cows\obj\x86\Debug\BullsAndCowsGame.exe
+C:\Users\Stef\Documents\GitHub\HQC-Team-Project---Bulls-and-Cows\obj\x86\Debug\BullsAndCowsGame.pdb
