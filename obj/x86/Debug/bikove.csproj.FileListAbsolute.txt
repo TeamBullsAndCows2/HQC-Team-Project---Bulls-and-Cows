@@ -5,3 +5,5 @@ D:\University\Telerik\KPK\TeamProject\obj\x86\Debug\BullsAndCowsGame.exe
 D:\University\Telerik\KPK\TeamProject\obj\x86\Debug\BullsAndCowsGame.pdb
 C:\Users\Stef\Documents\GitHub\HQC-Team-Project---Bulls-and-Cows\obj\x86\Debug\BullsAndCowsGame.exe
 C:\Users\Stef\Documents\GitHub\HQC-Team-Project---Bulls-and-Cows\obj\x86\Debug\BullsAndCowsGame.pdb
+E:\Docs\GitRepos\HQC-Team-Project\obj\x86\Debug\BullsAndCowsGame.exe
+E:\Docs\GitRepos\HQC-Team-Project\obj\x86\Debug\BullsAndCowsGame.pdb
