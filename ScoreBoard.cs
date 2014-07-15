@@ -6,12 +6,12 @@
     using System.Text;
     using System.IO;
 
-    public class Scoreboard
+    public class ScoreBoard
     {
         private SortedSet<GameScore> scores;
         private const int MaxPlayersToShow = 10;
 
-        public Scoreboard(string filename)
+        public ScoreBoard(string filename)
         {
             this.scores = new SortedSet<GameScore>();
 

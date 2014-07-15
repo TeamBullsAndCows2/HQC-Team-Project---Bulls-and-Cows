@@ -18,7 +18,7 @@
         public static void Main()
         {
             BullsAndCowsNumber bullsAndCowsNumber = new BullsAndCowsNumber();
-            Scoreboard scoreBoard = new Scoreboard(ScoresFile);
+            ScoreBoard scoreBoard = new ScoreBoard(ScoresFile);
             Console.WriteLine(WelcomeMessage);
             bool isExitSelected = false;
 
