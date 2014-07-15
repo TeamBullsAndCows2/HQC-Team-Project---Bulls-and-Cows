@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace bikove
+namespace BullsAndCows
 {
     public class Scoreboard
     {
-        private SortedSet<gameScore> scores;
+        private SortedSet<GameScore> scores;
         private const int MaxPlayersToShowInScoreboard = 10;
 
         public Scoreboard(string filename)
         {
-            this.scores = new SortedSet<gameScore>();
+            this.scores = new SortedSet<GameScore>();
             try
             {
                 using (StreamReader inputStream = new StreamReader(filename))
@@ -21,7 +21,7 @@ namespace bikove
                     while (!inputStream.EndOfStream)
                     {
                         string scoreString = inputStream.ReadLine();
-                        this.scores.Add(gameScore.Deserialize(scoreString));
+                        this.scores.Add(GameScore.GetGameScore(scoreString));
                     }
                 }
             }
@@ -33,7 +33,7 @@ namespace bikove
 
         public void AddScore(string name, int guesses)
         {
-            gameScore newScore = new gameScore(name, guesses);
+            GameScore newScore = new GameScore(name, guesses);
             this.scores.Add(newScore);
         }
 
@@ -43,9 +43,9 @@ namespace bikove
             {
                 using (StreamWriter outputStream = new StreamWriter(filename))
                 {
-                    foreach (gameScore gameScore in scores)
+                    foreach (GameScore gameScore in scores)
                     {
-                        outputStream.WriteLine(gameScore.Serialize());
+                        outputStream.WriteLine(gameScore.FormatGameScore());
                     }
                 }
             }
@@ -64,7 +64,7 @@ namespace bikove
             StringBuilder scoreBoard = new StringBuilder();
             scoreBoard.AppendLine("Scoreboard:");
             int count = 0;
-            foreach (gameScore gameScore in scores)
+            foreach (GameScore gameScore in scores)
             {
                 count++;
                 scoreBoard.AppendLine(string.Format("{0}. {1}", count, gameScore));
