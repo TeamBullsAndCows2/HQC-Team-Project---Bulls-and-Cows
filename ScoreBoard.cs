@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-
-namespace BullsAndCows
+﻿namespace BullsAndCows
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.IO;
+
     public class Scoreboard
     {
         private SortedSet<GameScore> scores;
-        private const int MaxPlayersToShowInScoreboard = 10;
+        private const int MaxPlayersToShow = 10;
 
         public Scoreboard(string filename)
         {
             this.scores = new SortedSet<GameScore>();
+
+            // TODO: bullshit try catch should be refactored
             try
             {
                 using (StreamReader inputStream = new StreamReader(filename))
@@ -39,6 +41,7 @@ namespace BullsAndCows
 
         public void SaveToFile(string filename)
         {
+            // TODO: bullshit try catch should be refactored
             try
             {
                 using (StreamWriter outputStream = new StreamWriter(filename))
@@ -57,20 +60,25 @@ namespace BullsAndCows
 
         public override string ToString()
         {
-            if (scores.Count == 0)
+            var lines = this.scores.Take(MaxPlayersToShow);
+
+            if (lines.Count() == 0)
             {
                 return "Top scoreboard is empty." + Environment.NewLine;
             }
-            StringBuilder scoreBoard = new StringBuilder();
-            scoreBoard.AppendLine("Scoreboard:");
-            int count = 0;
-            foreach (GameScore gameScore in scores)
+            else
             {
-                count++;
-                scoreBoard.AppendLine(string.Format("{0}. {1}", count, gameScore));
-                if (count > MaxPlayersToShowInScoreboard) break;
+                StringBuilder scoreBoard = new StringBuilder();
+                var index = 1;
+
+                scoreBoard.AppendLine("Scoreboard:");
+                foreach (var line in lines)
+                {
+                    scoreBoard.AppendLine(string.Format("{0}. {1}", index++, line));
+                }
+
+                return scoreBoard.ToString();
             }
-            return scoreBoard.ToString();
         }
     }
 }
