@@ -57,7 +57,7 @@ namespace BullsAndCows
                                 Result guessResult = bullsAndCowsNumber.TryToGuess(command);
                                 if (guessResult.Bulls == 4)
                                 {
-                                    if (bullsAndCowsNumber.cheats == 0)
+                                    if (bullsAndCowsNumber.Cheats == 0)
                                     {
                                         Console.Write(NumberGuessedWithoutCheats, bullsAndCowsNumber.GuessesCount, bullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
                                         string name = Console.ReadLine();
@@ -67,7 +67,7 @@ namespace BullsAndCows
                                     {
                                         Console.WriteLine(NumberGuessedWithCheats,
                                             bullsAndCowsNumber.GuessesCount, bullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts",
-                                            bullsAndCowsNumber.cheats, bullsAndCowsNumber.cheats == 1? "cheat" : "cheats");
+                                            bullsAndCowsNumber.Cheats, bullsAndCowsNumber.Cheats == 1? "cheat" : "cheats");
                                     }
                                     Console.Write(scoreBoard);
                                     Console.WriteLine();
