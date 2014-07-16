@@ -76,7 +76,7 @@
             return TryToGuess(number[0] - '0', number[1] - '0', number[2] - '0', number[3] - '0');
         }
 
-        private Result TryToGuess(int firstDigit, int secondDigit, int thirdDigit, int fourthDigit)
+        private void RaiseExceptionForInvalidDigit(int firstDigit, int secondDigit, int thirdDigit, int fourthDigit)
         {
             if (firstDigit < 0 || firstDigit > 9)
             {
@@ -97,115 +97,114 @@
             {
                 throw new ArgumentException("Invalid fourth digit");
             }
+        }
+
+        private Result TryToGuess(int firstDigit, int secondDigit, int thirdDigit, int fourthDigit)
+        {
+            RaiseExceptionForInvalidDigit(firstDigit, secondDigit, thirdDigit, fourthDigit);
 
             this.GuessesCount++;
 
-
             // Quite Long and relevantly stupid algorithm should be refactored
             int bulls = 0;
-            bool isFirstDigitBullOrCow = false;
+            bool[] isDigitBullOrCow = {false, false, false, false};
+            //bool isFirstDigitBullOrCow = false;
 
             // checks if firstDigit is a bull:
             if (this.FirstDigit == firstDigit)
             {
-                isFirstDigitBullOrCow = true;
+                isDigitBullOrCow[0] = true;
                 bulls++;
             }
-
-            bool isSecondDigitBullOrCow = false;
 
             // checks if secondDigit is a bull:
             if (this.SecondDigit == secondDigit)
             {
-                isSecondDigitBullOrCow = true;
+                isDigitBullOrCow[1] = true;
                 bulls++;
             }
-
-            bool isThirdDigitBullOrCow = false;
 
             // checks if thirdDigit is a bull:
             if (this.ThirdDigit == thirdDigit)
             {
-                isThirdDigitBullOrCow = true;
+                isDigitBullOrCow[2] = true;
                 bulls++;
             }
-
-            bool isFourthDigitBullOrCow = false;
 
             // checks if fourthDigit is a bull:
             if (this.FourthDigit == fourthDigit)
             {
-                isFourthDigitBullOrCow = true;
+                isDigitBullOrCow[3] = true;
                 bulls++;
             }
 
             int cows = 0;
 
             // checks if firstDigit is cow:
-            if (!isSecondDigitBullOrCow && firstDigit == SecondDigit)
+            if (!isDigitBullOrCow[1] && firstDigit == SecondDigit)
             {
-                isSecondDigitBullOrCow = true;
+                isDigitBullOrCow[1] = true;
                 cows++;
             }
-            else if (!isThirdDigitBullOrCow && firstDigit == ThirdDigit)
+            else if (!isDigitBullOrCow[2] && firstDigit == ThirdDigit)
             {
-                isThirdDigitBullOrCow = true;
+                isDigitBullOrCow[2] = true;
                 cows++;
             }
-            else if (!isFourthDigitBullOrCow && firstDigit == FourthDigit)
+            else if (!isDigitBullOrCow[3] && firstDigit == FourthDigit)
             {
-                isFourthDigitBullOrCow = true;
+                isDigitBullOrCow[3] = true;
                 cows++;
             }
 
             // checks if secondDigit is cow:
-            if (!isFirstDigitBullOrCow && secondDigit == FirstDigit)
+            if (!isDigitBullOrCow[0] && secondDigit == FirstDigit)
             {
-                isFirstDigitBullOrCow = true;
+                isDigitBullOrCow[0] = true;
                 cows++;
             }
-            else if (!isThirdDigitBullOrCow && secondDigit == ThirdDigit)
+            else if (!isDigitBullOrCow[2] && secondDigit == ThirdDigit)
             {
-                isThirdDigitBullOrCow = true;
+                isDigitBullOrCow[2] = true;
                 cows++;
             }
-            else if (!isFourthDigitBullOrCow && secondDigit == FourthDigit)
+            else if (!isDigitBullOrCow[3] && secondDigit == FourthDigit)
             {
-                isFourthDigitBullOrCow = true;
+                isDigitBullOrCow[3] = true;
                 cows++;
             }
 
             // checks if thirdDigit is cow:
-            if (!isFirstDigitBullOrCow && thirdDigit == FirstDigit)
+            if (!isDigitBullOrCow[0] && thirdDigit == FirstDigit)
             {
-                isFirstDigitBullOrCow = true;
+                isDigitBullOrCow[0] = true;
                 cows++;
             }
-            else if (!isSecondDigitBullOrCow && thirdDigit == SecondDigit)
+            else if (!isDigitBullOrCow[1] && thirdDigit == SecondDigit)
             {
-                isSecondDigitBullOrCow = true;
+                isDigitBullOrCow[1] = true;
                 cows++;
             }
-            else if (!isFourthDigitBullOrCow && thirdDigit == FourthDigit)
+            else if (!isDigitBullOrCow[3] && thirdDigit == FourthDigit)
             {
-                isFourthDigitBullOrCow = true;
+                isDigitBullOrCow[3] = true;
                 cows++;
             }
 
             // checks if fourthDigit is cow:
-            if (!isFirstDigitBullOrCow && fourthDigit == FirstDigit)
+            if (!isDigitBullOrCow[0] && fourthDigit == FirstDigit)
             {
-                isFirstDigitBullOrCow = true;
+                isDigitBullOrCow[0] = true;
                 cows++;
             }
-            else if (!isSecondDigitBullOrCow && fourthDigit == SecondDigit)
+            else if (!isDigitBullOrCow[1] && fourthDigit == SecondDigit)
             {
-                isSecondDigitBullOrCow = true;
+                isDigitBullOrCow[1] = true;
                 cows++;
             }
-            else if (!isThirdDigitBullOrCow && fourthDigit == ThirdDigit)
+            else if (!isDigitBullOrCow[2] && fourthDigit == ThirdDigit)
             {
-                isThirdDigitBullOrCow = true;
+                isDigitBullOrCow[2] = true;
                 cows++;
             }
 
