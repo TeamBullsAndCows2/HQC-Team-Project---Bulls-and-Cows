@@ -8,29 +8,31 @@
 
     public class BullsAndCowsNumber
     {
-        char[] cheatNumber;
         RandomGenerator randomGenerator;
+        private char[] cheatNumber;
+        private int[] number;
 
         public BullsAndCowsNumber()
         {
             randomGenerator = RandomGenerator.Instance;
             cheatNumber = new char[4] { 'X', 'X', 'X', 'X' };
+            this.number = new int[4];
             this.Cheats = 0;
             this.GuessesCount = 0;
             this.GenerateRandomNumbers();
         }
 
-        public int Cheats { get; private set; }
+        public int Cheats
+        {
+            get;
+            private set;
+        }
 
-        public int GuessesCount { get; private set; }
-
-        public int FirstDigit { get; private set; }
-
-        public int SecondDigit { get; private set; }
-
-        public int ThirdDigit { get; private set; }
-
-        public int FourthDigit { get; private set; }
+        public int GuessesCount
+        {
+            get;
+            private set;
+        }
 
         public string GetCheat()
         {
@@ -42,20 +44,12 @@
                     if (cheatNumber[randPossition] == 'X')
                     {
                         switch (randPossition)
-	                    {
-                            case 0: 
-                                cheatNumber[randPossition] = (char)(FirstDigit + '0'); 
-                                break;
-                            case 1:
-                                cheatNumber[randPossition] = (char)(SecondDigit + '0'); 
-                                break;
-                            case 2: 
-                                cheatNumber[randPossition] = (char)(ThirdDigit + '0'); 
-                                break;
-                            case 3: 
-                                cheatNumber[randPossition] = (char)(FourthDigit + '0'); 
-                                break;
-	                    }
+                        {
+                            case 0: cheatNumber[randPossition] = (char)(number[0] + '0'); break;
+                            case 1: cheatNumber[randPossition] = (char)(number[1] + '0'); break;
+                            case 2: cheatNumber[randPossition] = (char)(number[2] + '0'); break;
+                            case 3: cheatNumber[randPossition] = (char)(number[3] + '0'); break;
+                        }
                         break;
                     }
                 }
@@ -72,165 +66,78 @@
             {
                 throw new ArgumentException("Invalid string number");
             }
-
-            return TryToGuess(number[0] - '0', number[1] - '0', number[2] - '0', number[3] - '0');
+            int[] numberToGuess = new int[4];
+            numberToGuess[0] = number[0] - '0';
+            numberToGuess[1] = number[1] - '0';
+            numberToGuess[2] = number[2] - '0';
+            numberToGuess[3] = number[3] - '0';
+            return TryToGuess(numberToGuess);
         }
 
-        private void RaiseExceptionForInvalidDigit(int firstDigit, int secondDigit, int thirdDigit, int fourthDigit)
+        private Result TryToGuess(int[] numberToGuess)
         {
-            if (firstDigit < 0 || firstDigit > 9)
+            for (int i = 0; i < numberToGuess.Length; i++)
             {
-                throw new ArgumentException("Invalid first digit");
+                if (numberToGuess[i] < 0 || numberToGuess[i] > 9)
+                {
+                    throw new ArgumentException("Invalid digit");
+                }
             }
-
-            if (secondDigit < 0 || secondDigit > 9)
-            {
-                throw new ArgumentException("Invalid second digit");
-            }
-
-            if (thirdDigit < 0 || thirdDigit > 9)
-            {
-                throw new ArgumentException("Invalid third digit");
-            }
-
-            if (fourthDigit < 0 || fourthDigit > 9)
-            {
-                throw new ArgumentException("Invalid fourth digit");
-            }
-        }
-
-        private Result TryToGuess(int firstDigit, int secondDigit, int thirdDigit, int fourthDigit)
-        {
-            RaiseExceptionForInvalidDigit(firstDigit, secondDigit, thirdDigit, fourthDigit);
 
             this.GuessesCount++;
-
-            // Quite Long and relevantly stupid algorithm should be refactored
             int bulls = 0;
-            bool[] isDigitBullOrCow = {false, false, false, false};
-            //bool isFirstDigitBullOrCow = false;
-
-            // checks if firstDigit is a bull:
-            if (this.FirstDigit == firstDigit)
-            {
-                isDigitBullOrCow[0] = true;
-                bulls++;
-            }
-
-            // checks if secondDigit is a bull:
-            if (this.SecondDigit == secondDigit)
-            {
-                isDigitBullOrCow[1] = true;
-                bulls++;
-            }
-
-            // checks if thirdDigit is a bull:
-            if (this.ThirdDigit == thirdDigit)
-            {
-                isDigitBullOrCow[2] = true;
-                bulls++;
-            }
-
-            // checks if fourthDigit is a bull:
-            if (this.FourthDigit == fourthDigit)
-            {
-                isDigitBullOrCow[3] = true;
-                bulls++;
-            }
-
             int cows = 0;
 
-            // checks if firstDigit is cow:
-            if (!isDigitBullOrCow[1] && firstDigit == SecondDigit)
+            for (int i = 0; i < numberToGuess.Length; i++)
             {
-                isDigitBullOrCow[1] = true;
-                cows++;
-            }
-            else if (!isDigitBullOrCow[2] && firstDigit == ThirdDigit)
-            {
-                isDigitBullOrCow[2] = true;
-                cows++;
-            }
-            else if (!isDigitBullOrCow[3] && firstDigit == FourthDigit)
-            {
-                isDigitBullOrCow[3] = true;
-                cows++;
-            }
-
-            // checks if secondDigit is cow:
-            if (!isDigitBullOrCow[0] && secondDigit == FirstDigit)
-            {
-                isDigitBullOrCow[0] = true;
-                cows++;
-            }
-            else if (!isDigitBullOrCow[2] && secondDigit == ThirdDigit)
-            {
-                isDigitBullOrCow[2] = true;
-                cows++;
-            }
-            else if (!isDigitBullOrCow[3] && secondDigit == FourthDigit)
-            {
-                isDigitBullOrCow[3] = true;
-                cows++;
-            }
-
-            // checks if thirdDigit is cow:
-            if (!isDigitBullOrCow[0] && thirdDigit == FirstDigit)
-            {
-                isDigitBullOrCow[0] = true;
-                cows++;
-            }
-            else if (!isDigitBullOrCow[1] && thirdDigit == SecondDigit)
-            {
-                isDigitBullOrCow[1] = true;
-                cows++;
-            }
-            else if (!isDigitBullOrCow[3] && thirdDigit == FourthDigit)
-            {
-                isDigitBullOrCow[3] = true;
-                cows++;
-            }
-
-            // checks if fourthDigit is cow:
-            if (!isDigitBullOrCow[0] && fourthDigit == FirstDigit)
-            {
-                isDigitBullOrCow[0] = true;
-                cows++;
-            }
-            else if (!isDigitBullOrCow[1] && fourthDigit == SecondDigit)
-            {
-                isDigitBullOrCow[1] = true;
-                cows++;
-            }
-            else if (!isDigitBullOrCow[2] && fourthDigit == ThirdDigit)
-            {
-                isDigitBullOrCow[2] = true;
-                cows++;
+                // checks for bulls
+                if (this.number[i] == numberToGuess[i])
+                {
+                    // add a bull
+                    bulls++;
+                }
+                else
+                {
+                    // if this digit is not in the right place
+                    // loop that digit trough the array of the number's digits in searching for cows
+                    for (int j = 0; j < numberToGuess.Length; j++)
+                    {
+                        // if we are not in the current position and
+                        // if the number in the current position is found in the guessed number's array
+                        if (i != j && this.number[i] == numberToGuess[j])
+                        {
+                            // add a cow and break the loop
+                            cows++;
+                            break;
+                        }
+                    }
+                }
             }
 
             Result guessResult = new Result();
             guessResult.Bulls = bulls;
             guessResult.Cows = cows;
-
             return guessResult;
         }
 
         private void GenerateRandomNumbers()
         {
-            this.FirstDigit = randomGenerator.GetValue(0, 9);
-            this.SecondDigit = randomGenerator.GetValue(0, 9);
-            this.ThirdDigit = randomGenerator.GetValue(0, 9);
-            this.FourthDigit = randomGenerator.GetValue(0, 9);
+            for (int i = 0; i < this.number.Length; i++)
+            {
+                this.number[i] = randomGenerator.GetValue(0, 9);
+            }
         }
 
         public override string ToString()
         {
-            StringBuilder numbers = new StringBuilder();
-            numbers.Append(FirstDigit);
-            numbers.Append(SecondDigit);
-            numbers.Append(ThirdDigit);
-            numbers.Append(FourthDigit);
-            return numbers.ToString();
+            StringBuilder numberStringBuilder = new StringBuilder();
+
+            for (int i = 0; i < this.number.Length; i++)
+            {
+                numberStringBuilder.Append(this.number[i]);
+            }
+
+            return numberStringBuilder.ToString();
         }
 
         public override bool Equals(object obj)
@@ -242,16 +149,19 @@
             }
             else
             {
-                return (FirstDigit == objectToCompare.FirstDigit &&
-                        SecondDigit == objectToCompare.SecondDigit &&
-                        ThirdDigit == objectToCompare.ThirdDigit &&
-                        FourthDigit == objectToCompare.FourthDigit);
+                return (this.number[0] == objectToCompare.number[0] &&
+                        this.number[1] == objectToCompare.number[1] &&
+                        this.number[2] == objectToCompare.number[2] &&
+                        this.number[3] == objectToCompare.number[3]);
             }
         }
 
         public override int GetHashCode()
         {
-            return FirstDigit.GetHashCode() ^ SecondDigit.GetHashCode() ^ ThirdDigit.GetHashCode() ^ FourthDigit.GetHashCode();
+            return this.number[0].GetHashCode() ^
+                this.number[1].GetHashCode() ^
+                this.number[2].GetHashCode() ^
+                this.number[3].GetHashCode();
         }
     }
 }
