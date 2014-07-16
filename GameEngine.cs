@@ -1,11 +1,11 @@
 ﻿namespace BullsAndCows
 {
+    using BullsAndCows.Interfaces;
+    using BullsAndCows.Tools;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using BullsAndCowsGame.Interfaces;
-    using BullsAndCowsGame.Tools;
 
     public class GameEngine
     {
@@ -19,6 +19,7 @@
 
         public static void Main()
         {
+            var randomGenerator = RandomGenerator.Instance;
             BullsAndCowsNumber bullsAndCowsNumber = new BullsAndCowsNumber();
             ScoreBoard scoreBoard = new ScoreBoard(ScoresFile);
             Console.WriteLine(WelcomeMessage);

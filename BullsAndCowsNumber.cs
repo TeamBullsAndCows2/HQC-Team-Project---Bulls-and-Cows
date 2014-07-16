@@ -1,5 +1,6 @@
 ﻿namespace BullsAndCows
 {
+    using BullsAndCows.Tools;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -7,13 +8,12 @@
 
     public class BullsAndCowsNumber
     {
-        // TODO: Random should be extracted in external class
-        Random randomGenerator;
         char[] cheatNumber;
+        RandomGenerator randomGenerator;
 
         public BullsAndCowsNumber()
         {
-            randomGenerator = new Random();
+            randomGenerator = RandomGenerator.Instance;
             cheatNumber = new char[4] { 'X', 'X', 'X', 'X' };
             this.Cheats = 0;
             this.GuessesCount = 0;
@@ -38,7 +38,7 @@
             {
                 while (true)
                 {
-                    int randPossition = randomGenerator.Next(0, 4);
+                    int randPossition = randomGenerator.GetValue(0, 3);
                     if (cheatNumber[randPossition] == 'X')
                     {
                         switch (randPossition)
@@ -218,10 +218,10 @@
 
         private void GenerateRandomNumbers()
         {
-            this.FirstDigit = randomGenerator.Next(0, 10);
-            this.SecondDigit = randomGenerator.Next(0, 10);
-            this.ThirdDigit = randomGenerator.Next(0, 10);
-            this.FourthDigit = randomGenerator.Next(0, 10);
+            this.FirstDigit = randomGenerator.GetValue(0, 9);
+            this.SecondDigit = randomGenerator.GetValue(0, 9);
+            this.ThirdDigit = randomGenerator.GetValue(0, 9);
+            this.FourthDigit = randomGenerator.GetValue(0, 9);
         }
 
         public override string ToString()

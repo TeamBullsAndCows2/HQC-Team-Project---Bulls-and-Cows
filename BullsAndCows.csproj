@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{47CF99F9-82C7-4092-BCEB-3809268FCAD9}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BullsAndCowsGame</RootNamespace>
+    <RootNamespace>BullsAndCows</RootNamespace>
     <AssemblyName>BullsAndCowsGame</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -44,11 +44,13 @@
   <ItemGroup>
     <Compile Include="BullsAndCowsNumber.cs" />
     <Compile Include="GameScore.cs" />
+    <Compile Include="Interfaces\IRandomGenerator.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="ScoreBoard.cs" />
     <Compile Include="Tools\ConsoleRenderer.cs" />
+    <Compile Include="Tools\RandomGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

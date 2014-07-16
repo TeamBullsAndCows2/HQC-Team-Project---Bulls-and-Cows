@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BullsAndCowsGame.Interfaces
+﻿namespace BullsAndCows.Interfaces
 {
+    using System;
+
     public interface IRenderer
     {
         void Write(Object message);

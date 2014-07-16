@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BullsAndCowsGame.Interfaces;
-
-namespace BullsAndCowsGame.Tools
+﻿namespace BullsAndCows.Tools
 {
+    using BullsAndCows.Interfaces;
+    using System;
+
     public class ConsoleRenderer : IRenderer
     {
         public ConsoleRenderer()
