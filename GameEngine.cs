@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BullsAndCowsGame.Interfaces;
+    using BullsAndCowsGame.Tools;
 
     public class GameEngine
     {
@@ -22,6 +24,8 @@
             Console.WriteLine(WelcomeMessage);
             bool isExitSelected = false;
 
+            IRenderer renderer = new ConsoleRenderer(); //Stef: To be done in the GameEngine constructor
+
             while (true)
             {
                 if (isExitSelected)
@@ -29,25 +33,25 @@
                     break;
                 }
 
-                Console.Write("Enter your guess or command: ");
+                renderer.Write("Enter your guess or command: ");
                 string command = Console.ReadLine();
 
                 switch (command)
                 {
                     case "exit":
-                        Console.WriteLine(GoodBuyMessage);
+                        renderer.WriteLine(GoodBuyMessage);
                         isExitSelected = true;
                         break;
                     case "top":
-                        Console.Write(scoreBoard);
+                        renderer.Write(scoreBoard);
                         break;
                     case "restart":
-                        Console.WriteLine();
-                        Console.WriteLine(WelcomeMessage);
+                        renderer.WriteLine();
+                        renderer.WriteLine(WelcomeMessage);
                         bullsAndCowsNumber = new BullsAndCowsNumber();
                         break;
                     case "help":
-                        Console.WriteLine("The number looks like {0}.", bullsAndCowsNumber.GetCheat());
+                        renderer.WriteLine("The number looks like {0}.", bullsAndCowsNumber.GetCheat());
                         break;
                     default:
                         try
@@ -58,13 +62,13 @@
                             {
                                 if (bullsAndCowsNumber.Cheats == 0)
                                 {
-                                    Console.Write(NumberGuessedWithoutCheats, bullsAndCowsNumber.GuessesCount, bullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
+                                    renderer.Write(NumberGuessedWithoutCheats, bullsAndCowsNumber.GuessesCount, bullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
                                     string name = Console.ReadLine();
                                     scoreBoard.AddScore(name, bullsAndCowsNumber.GuessesCount);
                                 }
                                 else
                                 {
-                                    Console.WriteLine(
+                                    renderer.WriteLine(
                                         NumberGuessedWithCheats,
                                         bullsAndCowsNumber.GuessesCount,
                                         bullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts",
@@ -72,19 +76,19 @@
                                         bullsAndCowsNumber.Cheats == 1 ? "cheat" : "cheats");
                                 }
 
-                                Console.Write(scoreBoard);
-                                Console.WriteLine();
-                                Console.WriteLine(WelcomeMessage);
+                                renderer.Write(scoreBoard);
+                                renderer.WriteLine();
+                                renderer.WriteLine(WelcomeMessage);
                                 bullsAndCowsNumber = new BullsAndCowsNumber();
                             }
                             else
                             {
-                                Console.WriteLine("{0} {1}", WrongNumberMessage, guessResult);
+                                renderer.WriteLine("{0} {1}", WrongNumberMessage, guessResult);
                             }
                         }
                         catch (ArgumentException)
                         {
-                            Console.WriteLine(InvalidCommandMessage);
+                            renderer.WriteLine(InvalidCommandMessage);
                         }
 
                         break;
