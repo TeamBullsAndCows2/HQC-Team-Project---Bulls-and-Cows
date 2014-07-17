@@ -5,7 +5,7 @@
 
     public sealed class RandomGenerator : IRandomGenerator
     {
-        private static RandomGenerator instance = new RandomGenerator();
+        private static readonly RandomGenerator instance = new RandomGenerator();
         private Random randomGen;
 
         private RandomGenerator()
