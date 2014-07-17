@@ -8,6 +8,7 @@
         private static readonly RandomGenerator instance = new RandomGenerator();
         private Random randomGen;
 
+
         private RandomGenerator()
         {
             this.randomGen = new Random();
