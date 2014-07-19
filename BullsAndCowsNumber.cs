@@ -1,5 +1,6 @@
 ﻿namespace BullsAndCows
 {
+    using BullsAndCows.Interfaces;
     using BullsAndCows.Tools;
     using System;
     using System.Collections.Generic;
@@ -8,7 +9,7 @@
 
     public class BullsAndCowsNumber
     {
-        RandomGenerator randomGenerator;
+        IRandomGenerator randomGenerator;
         private char[] cheatNumber;
         private int[] number;
 
@@ -34,6 +35,8 @@
             private set;
         }
 
+
+        // Should be in another class whcih deals with Cheats
         public string GetCheat()
         {
             if (this.Cheats < 4)
@@ -45,10 +48,18 @@
                     {
                         switch (randPossition)
                         {
-                            case 0: cheatNumber[randPossition] = (char)(number[0] + '0'); break;
-                            case 1: cheatNumber[randPossition] = (char)(number[1] + '0'); break;
-                            case 2: cheatNumber[randPossition] = (char)(number[2] + '0'); break;
-                            case 3: cheatNumber[randPossition] = (char)(number[3] + '0'); break;
+                            case 0: 
+                                cheatNumber[randPossition] = (char)(number[0] + '0');
+                                break;
+                            case 1:
+                                cheatNumber[randPossition] = (char)(number[1] + '0');
+                                break;
+                            case 2:
+                                cheatNumber[randPossition] = (char)(number[2] + '0');
+                                break;
+                            case 3:
+                                cheatNumber[randPossition] = (char)(number[3] + '0');
+                                break;
                         }
                         break;
                     }
@@ -60,6 +71,7 @@
             return new String(cheatNumber);
         }
 
+        // Engine?
         public Result TryToGuess(string number)
         {
             if (string.IsNullOrEmpty(number) || number.Trim().Length != 4)
@@ -120,6 +132,7 @@
             return guessResult;
         }
 
+        // Engine
         private void GenerateRandomNumbers()
         {
             for (int i = 0; i < this.number.Length; i++)
