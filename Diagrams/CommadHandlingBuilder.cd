@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BullsAndCows.Tools.CommandHandler" BaseTypeListCollapsed="true">
-    <Position X="5" Y="0.5" Width="2" />
+    <Position X="5.25" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAIABAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Tools\CommandHandler.cs</FileName>
