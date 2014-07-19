@@ -43,23 +43,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BullsAndCowsNumber.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="GameScore.cs" />
-    <Compile Include="Interfaces\ICommand.cs" />
-    <Compile Include="Interfaces\ICommandHandler.cs" />
+    <Compile Include="Interfaces\IInputManager.cs" />
     <Compile Include="Interfaces\IRandomGenerator.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Result.cs" />
-    <Compile Include="GameEngine.cs" />
+    <Compile Include="GameManager.cs" />
     <Compile Include="ScoreBoard.cs" />
-    <Compile Include="Tools\CommandHandler.cs" />
-    <Compile Include="Tools\Command.cs" />
+    <Compile Include="Tools\ConsoleInputManager.cs" />
     <Compile Include="Tools\ConsoleRenderer.cs" />
     <Compile Include="Tools\RandomGenerator.cs" />
-    <Compile Include="Tools\RestartCommand.cs" />
-    <Compile Include="Tools\TopCommand.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Diagrams\CommadHandlingBuilder.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
