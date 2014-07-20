@@ -45,11 +45,18 @@
     <Compile Include="BullsAndCowsNumber.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="GameScore.cs" />
+    <Compile Include="HumanPlayer.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\ICommandHandler.cs" />
     <Compile Include="Interfaces\IInputManager.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IRandomGenerator.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
+    <Compile Include="Messages1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="GameManager.cs" />
@@ -64,6 +71,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\CommadHandlingBuilder.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

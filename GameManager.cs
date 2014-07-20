@@ -16,12 +16,17 @@
         public const string NumberGuessedWithoutCheats = "Congratulations! You guessed the secret number in {0} {1}.\nPlease enter your name for the top scoreboard: ";
         public const string NumberGuessedWithCheats = "Congratulations! You guessed the secret number in {0} {1} and {2} {3}.\nYou are not allowed to enter the top scoreboard.";
         public const string GoodBuyMessage = "Good bye!";
+        
 
         private IRenderer renderer;
         private IInputManager inputManager;
         private RandomGenerator randomGenerator = RandomGenerator.Instance;
-        private BullsAndCowsNumber bullsAndCowsNumber = new BullsAndCowsNumber();
+        //private BullsAndCowsNumber bullsAndCowsNumber = new BullsAndCowsNumber();
+        private List<BullsAndCowsNumber> bullsAndCowsNumbers = new List<BullsAndCowsNumber>();
         private ScoreBoard scoreBoard = new ScoreBoard(ScoresFile);
+        private List<IPlayer> players = new List<IPlayer>();
+        private int currentPlayerIndex;
+
 
         public bool IsRunning { get; private set; }
 
@@ -30,14 +35,14 @@
             this.renderer = renderer;
             this.inputManager = inputManager;
             this.IsRunning = true;
+            this.currentPlayerIndex = 0;
         }
 
         // TODO: Think for better name!
-        public void HandleUserCommand()
+        public void HandleUserInput(string playerInput)
         {
-            renderer.Write("Enter your guess or command: ");
-            string userCommand = inputManager.GetUserInput();
-            switch (userCommand)
+
+            switch (playerInput)
             {
                 case "exit":
                     HandleExitCommand();
@@ -52,64 +57,75 @@
                     HandleHelpCommand();
                     break;
                 default:
-                    HandleDefaultCommand(userCommand);
+                    HandleGuessNumberCommand(playerInput);
                     break;
- 
+
             }
         }
 
         // TODO: Refacture and split
-        private void HandleDefaultCommand(string command)
+        private void HandleGuessNumberCommand(string number)
         {
-            try
+            if (!BullsAndCowsNumber.IsValidNumber(number))
             {
-                Result guessResult = bullsAndCowsNumber.TryToGuess(command);
+                renderer.WriteLine(InvalidCommandMessage);
+                return;
+            }
 
-                if (guessResult.Bulls == 4)
+            BullsAndCowsNumber currentBullsAndCowsNumber = this.bullsAndCowsNumbers[this.currentPlayerIndex];
+            Result guessResult = currentBullsAndCowsNumber.TryToGuess(number);
+
+            if (guessResult.Bulls < 4)
+            {
+                renderer.WriteLine("{0} {1}", WrongNumberMessage, guessResult);
+
+                // TODO: NOT HERE!
+                this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
+            }
+            else
+            {
+
+                if (currentBullsAndCowsNumber.Cheats == 0)
                 {
-                    if (bullsAndCowsNumber.Cheats == 0)
-                    {
-                        renderer.Write(NumberGuessedWithoutCheats, bullsAndCowsNumber.GuessesCount, bullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
-                        string name = Console.ReadLine();
-                        scoreBoard.AddScore(name, bullsAndCowsNumber.GuessesCount);
-                        scoreBoard.SaveToFile(ScoresFile);
-                    }
-                    else
-                    {
-                        renderer.WriteLine(
-                            NumberGuessedWithCheats,
-                            bullsAndCowsNumber.GuessesCount,
-                            bullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts",
-                            bullsAndCowsNumber.Cheats,
-                            bullsAndCowsNumber.Cheats == 1 ? "cheat" : "cheats");
-                    }
-
-                    renderer.Write(scoreBoard);
-                    renderer.WriteLine();
-                    renderer.WriteLine(WelcomeMessage);
-                    bullsAndCowsNumber = new BullsAndCowsNumber();
+                    renderer.Write(NumberGuessedWithoutCheats, currentBullsAndCowsNumber.GuessesCount, currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
+                    string name = Console.ReadLine();
+                    scoreBoard.AddScore(name, currentBullsAndCowsNumber.GuessesCount);
+                    scoreBoard.SaveToFile();
                 }
                 else
                 {
-                    renderer.WriteLine("{0} {1}", WrongNumberMessage, guessResult);
+                    renderer.WriteLine(
+                        NumberGuessedWithCheats,
+                        currentBullsAndCowsNumber.GuessesCount,
+                        currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts",
+                        currentBullsAndCowsNumber.Cheats,
+                        currentBullsAndCowsNumber.Cheats == 1 ? "cheat" : "cheats");
                 }
+
+                renderer.Write(scoreBoard);
+                renderer.WriteLine();
+                renderer.WriteLine(WelcomeMessage);
+                currentBullsAndCowsNumber = new BullsAndCowsNumber();
             }
-            catch (ArgumentException)
-            {
-                renderer.WriteLine(InvalidCommandMessage);
-            }
+        }
+
+        private void SavePlayerScore()
+        {
+
         }
 
         private void HandleHelpCommand()
         {
-            renderer.WriteLine("The number looks like {0}.", bullsAndCowsNumber.GetCheat());
+            renderer.WriteLine("The number looks like {0}.", this.bullsAndCowsNumbers[this.currentPlayerIndex].GetCheat());
+            // TODO: NOT HERE!
+            this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
         }
 
         private void HandleRestartCommand()
         {
             renderer.WriteLine();
             renderer.WriteLine(WelcomeMessage);
-            bullsAndCowsNumber = new BullsAndCowsNumber();
+            this.bullsAndCowsNumbers[this.currentPlayerIndex] = new BullsAndCowsNumber();
         }
 
         private void HandleTopCommand()
@@ -121,6 +137,30 @@
         {
             this.IsRunning = false;
             renderer.WriteLine(GoodBuyMessage);
+        }
+
+        internal void addPlayer(IPlayer player)
+        {
+            // TODO: IPlayer validation
+
+            this.players.Add(player);
+            this.bullsAndCowsNumbers.Add(new BullsAndCowsNumber());
+        }
+
+        public void NextTurn()
+        {
+            IPlayer currentPlayer = GetCurrentPlayer();
+            renderer.Write("{0} Enter your guess or command: {1}", this.players[this.currentPlayerIndex].Name, bullsAndCowsNumbers[currentPlayerIndex]);
+            string currentPlayerInput = currentPlayer.GetInput();
+            this.HandleUserInput(currentPlayerInput);
+        }
+
+        private IPlayer GetCurrentPlayer()
+        {
+            // TODO: If players count == 0 return
+
+            IPlayer currentPlayer = players[this.currentPlayerIndex];
+            return currentPlayer;
         }
     }
 }

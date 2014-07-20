@@ -35,6 +35,24 @@
             private set;
         }
 
+        public static bool IsValidNumber(string input)
+        {
+            int number = 0;
+            bool result = true;
+            bool isNumber = int.TryParse(input, out number);
+
+            if (input.Length != 4)
+            {
+                result = false;
+            }
+
+            if (!isNumber || number < 1000 || 9999 < number)
+            {
+                result = false;
+            }
+
+            return result;
+        }
 
         // Should be in another class whcih deals with Cheats
         public string GetCheat()
@@ -135,7 +153,9 @@
         // Engine
         private void GenerateRandomNumbers()
         {
-            for (int i = 0; i < this.number.Length; i++)
+            this.number[0] = randomGenerator.GetValue(1, 9);
+
+            for (int i = 1; i < this.number.Length; i++)
             {
                 this.number[i] = randomGenerator.GetValue(0, 9);
             }

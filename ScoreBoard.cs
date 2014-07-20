@@ -10,15 +10,17 @@
     {
         private SortedSet<GameScore> scores;
         private const int MaxPlayersToShow = 10;
+        private string filename;
 
         public ScoreBoard(string filename)
         {
             this.scores = new SortedSet<GameScore>();
+            this.filename = filename;
 
             // TODO: bullshit try catch should be refactored
             try
             {
-                using (StreamReader inputStream = new StreamReader(filename))
+                using (StreamReader inputStream = new StreamReader(this.filename))
                 {
                     while (!inputStream.EndOfStream)
                     {
@@ -39,12 +41,12 @@
             this.scores.Add(newScore);
         }
 
-        public void SaveToFile(string filename)
+        public void SaveToFile()
         {
             // TODO: bullshit try catch should be refactored
             try
             {
-                using (StreamWriter outputStream = new StreamWriter(filename))
+                using (StreamWriter outputStream = new StreamWriter(this.filename))
                 {
                     foreach (GameScore gameScore in scores)
                     {
