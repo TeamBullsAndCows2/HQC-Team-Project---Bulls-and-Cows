@@ -65,6 +65,8 @@
     <Compile Include="Tools\CommandHandler.cs" />
     <Compile Include="Tools\ConsoleInputManager.cs" />
     <Compile Include="Tools\ConsoleRenderer.cs" />
+    <Compile Include="Tools\ExitCommand.cs" />
+    <Compile Include="Tools\HelpCommand.cs" />
     <Compile Include="Tools\RandomGenerator.cs" />
     <Compile Include="Tools\RestartCommand.cs" />
     <Compile Include="Tools\TopCommand.cs" />

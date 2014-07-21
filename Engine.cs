@@ -9,7 +9,12 @@ namespace BullsAndCows
 
     public class Engine
     {
-        private readonly GameManager manager = new GameManager(new ConsoleRenderer(), new ConsoleInputManager());
+        private readonly GameManager manager;
+
+        public Engine()
+        {
+            manager = new GameManager(new ConsoleRenderer(), new ConsoleInputManager());
+        }
 
         public void Start()
         {

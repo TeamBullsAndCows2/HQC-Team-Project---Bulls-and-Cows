@@ -16,19 +16,22 @@
         public const string NumberGuessedWithoutCheats = "Congratulations! You guessed the secret number in {0} {1}.\nPlease enter your name for the top scoreboard: ";
         public const string NumberGuessedWithCheats = "Congratulations! You guessed the secret number in {0} {1} and {2} {3}.\nYou are not allowed to enter the top scoreboard.";
         public const string GoodBuyMessage = "Good bye!";
-        
+
 
         private IRenderer renderer;
         private IInputManager inputManager;
-        private RandomGenerator randomGenerator = RandomGenerator.Instance;
+        private IRandomGenerator randomGenerator;
         //private BullsAndCowsNumber bullsAndCowsNumber = new BullsAndCowsNumber();
-        private List<BullsAndCowsNumber> bullsAndCowsNumbers = new List<BullsAndCowsNumber>();
-        private ScoreBoard scoreBoard = new ScoreBoard(ScoresFile);
-        private List<IPlayer> players = new List<IPlayer>();
+        private IList<BullsAndCowsNumber> bullsAndCowsNumbers;
+        private ScoreBoard scoreBoard;
+        private List<IPlayer> players;
+
+        // TODO: Should be refactored to use a CurrentUser abstraction not indexex.
         private int currentPlayerIndex;
+        private ICommandHandler commandHandler;
 
 
-        public bool IsRunning { get; private set; }
+        public bool IsRunning { get; set; }
 
         public GameManager(IRenderer renderer, IInputManager inputManager)
         {
@@ -36,33 +39,72 @@
             this.inputManager = inputManager;
             this.IsRunning = true;
             this.currentPlayerIndex = 0;
+            this.scoreBoard = new ScoreBoard(ScoresFile);
+            this.players = new List<IPlayer>();
+            this.randomGenerator = RandomGenerator.Instance;
+            this.bullsAndCowsNumbers = new List<BullsAndCowsNumber>();
+            this.commandHandler = InitializeCommandHandler();
+        }
+
+        public IRenderer Renderer
+        {
+            get
+            {
+                return this.renderer;
+            }
+        }
+
+        public IList<BullsAndCowsNumber> BullsAndCowsNumbers
+        {
+            get
+            {
+                return this.bullsAndCowsNumbers;
+            }
+        }
+
+        public int CurrentPlayerIndex
+        {
+            get
+            {
+                return this.currentPlayerIndex;
+            }
+
+            set
+            {
+                this.currentPlayerIndex = value;
+            }
+        }
+        
+        public ScoreBoard ScoreBoard
+        {
+            get
+            {
+                return this.scoreBoard;
+            }
+        }
+
+        public List<IPlayer> Players
+        {
+            get
+            {
+                return this.players;
+            }
         }
 
         // TODO: Think for better name!
         public void HandleUserInput(string playerInput)
         {
-
-            switch (playerInput)
+            if (BullsAndCowsNumber.IsValidNumber(playerInput))
             {
-                case "exit":
-                    HandleExitCommand();
-                    break;
-                case "top":
-                    HandleTopCommand();
-                    break;
-                case "restart":
-                    HandleRestartCommand();
-                    break;
-                case "help":
-                    HandleHelpCommand();
-                    break;
-                default:
-                    HandleGuessNumberCommand(playerInput);
-                    break;
-
+                HandleGuessNumberCommand(playerInput);
+            }
+            else
+            {
+                this.commandHandler.ExecuteCommand(playerInput);
             }
         }
 
+        // TODO: Should be added in the CommandHandle after tefactoring
         // TODO: Refacture and split
         private void HandleGuessNumberCommand(string number)
         {
@@ -109,34 +151,23 @@
             }
         }
 
+
+        private ICommandHandler InitializeCommandHandler()
+        {
+            var commandHandler = new CommandHandler();
+
+            // using this for ease of use can be more granular e.g multiple different parameters
+            commandHandler.AddCommand(new RestartCommand(this));
+            commandHandler.AddCommand(new ExitCommand(this));
+            commandHandler.AddCommand(new HelpCommand(this));
+            commandHandler.AddCommand(new TopCommand(this));
+
+            return commandHandler;
+        }
+
         private void SavePlayerScore()
         {
 
-        }
-
-        private void HandleHelpCommand()
-        {
-            renderer.WriteLine("The number looks like {0}.", this.bullsAndCowsNumbers[this.currentPlayerIndex].GetCheat());
-            // TODO: NOT HERE!
-            this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
-        }
-
-        private void HandleRestartCommand()
-        {
-            renderer.WriteLine();
-            renderer.WriteLine(WelcomeMessage);
-            this.bullsAndCowsNumbers[this.currentPlayerIndex] = new BullsAndCowsNumber();
-        }
-
-        private void HandleTopCommand()
-        {
-            renderer.Write(scoreBoard);
-        }
-
-        private void HandleExitCommand()
-        {
-            this.IsRunning = false;
-            renderer.WriteLine(GoodBuyMessage);
         }
 
         internal void addPlayer(IPlayer player)
@@ -158,7 +189,6 @@
         private IPlayer GetCurrentPlayer()
         {
             // TODO: If players count == 0 return
-
             IPlayer currentPlayer = players[this.currentPlayerIndex];
             return currentPlayer;
         }

@@ -2,12 +2,12 @@
 {
     using System;
 
-    public class TopCommand : Command
+    class ExitCommand : Command
     {
-        private const string name = "top";
+        private const string name = "exit";
         private GameManager gameManager;
 
-        public TopCommand(GameManager gameManager)
+        public ExitCommand(GameManager gameManager)
             : base(name)
         {
             this.gameManager = gameManager;
@@ -15,7 +15,8 @@
 
         public override void Execute()
         {
-            gameManager.Renderer.WriteLine(gameManager.ScoreBoard);
+            gameManager.IsRunning = false;
+            gameManager.Renderer.WriteLine(GameManager.GoodBuyMessage);
         }
     }
 }

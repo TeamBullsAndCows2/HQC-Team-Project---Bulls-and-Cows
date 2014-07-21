@@ -5,15 +5,19 @@
     public class RestartCommand : Command
     {
         private const string name = "restart";
+        private GameManager gameManager;
 
-        public RestartCommand()
+        public RestartCommand(GameManager gameManager)
             : base(name)
         {
+            this.gameManager = gameManager;
         }
 
         public override void Execute()
         {
-            // Execute REstart Logic here;
+            gameManager.Renderer.WriteLine();
+            gameManager.Renderer.WriteLine(GameManager.WelcomeMessage);
+            gameManager.BullsAndCowsNumbers[gameManager.CurrentPlayerIndex] = new BullsAndCowsNumber();
         }
     }
 }

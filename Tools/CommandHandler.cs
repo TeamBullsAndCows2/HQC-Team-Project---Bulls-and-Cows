@@ -6,7 +6,7 @@
 
     public class CommandHandler : ICommandHandler
     {
-        Dictionary<string, ICommand> commands;
+        private Dictionary<string, ICommand> commands;
 
         public CommandHandler()
         {
@@ -35,6 +35,11 @@
 
         public void ExecuteCommand(string name)
         {
+            if (!this.commands.ContainsKey(name))
+            {
+                throw new ArgumentException("This command is invalid!");
+            }
+
             this.commands[name].Execute();
         }
     }
