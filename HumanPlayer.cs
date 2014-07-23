@@ -23,8 +23,12 @@ namespace BullsAndCows
             }
             private set
             {
-                // TODO: string Validation
-                this.name = value;
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException("The name cannot be null! Please enter a valid name!");
+                }
+
+                this.name = value.Trim();
             }
         }
 

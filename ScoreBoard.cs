@@ -12,20 +12,30 @@
         private const int MaxPlayersToShow = 10;
         private string filename;
 
+        public string Filename
+        {
+            get { return filename; }
+            set { this.filename = value; }
+        }
+
         public ScoreBoard(string filename)
         {
-            this.scores = new SortedSet<GameScore>();
-            this.filename = filename;
+            this.Filename = filename;
+            this.scores = LoadScoresFromFile(this.Filename);
+        }
 
+        public SortedSet<GameScore> LoadScoresFromFile(string filename)
+        {
+            var scores = new SortedSet<GameScore>();
             // TODO: bullshit try catch should be refactored
             try
             {
-                using (StreamReader inputStream = new StreamReader(this.filename))
+                using (StreamReader inputStream = new StreamReader(filename))
                 {
                     while (!inputStream.EndOfStream)
                     {
                         string scoreString = inputStream.ReadLine();
-                        this.scores.Add(GameScore.GetGameScore(scoreString));
+                        scores.Add(GameScore.GetGameScore(scoreString));
                     }
                 }
             }
@@ -33,6 +43,8 @@
             {
                 // Stop reading
             }
+            
+            return scores;
         }
 
         public void AddScore(string name, int guesses)
@@ -46,7 +58,7 @@
             // TODO: bullshit try catch should be refactored
             try
             {
-                using (StreamWriter outputStream = new StreamWriter(this.filename))
+                using (StreamWriter outputStream = new StreamWriter(this.Filename))
                 {
                     foreach (GameScore gameScore in scores)
                     {

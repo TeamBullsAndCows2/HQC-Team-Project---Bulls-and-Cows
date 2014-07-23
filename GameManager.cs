@@ -129,9 +129,10 @@
 
                 if (currentBullsAndCowsNumber.Cheats == 0)
                 {
-                    renderer.Write(NumberGuessedWithoutCheats, currentBullsAndCowsNumber.GuessesCount, currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
-                    string name = Console.ReadLine();
-                    scoreBoard.AddScore(name, currentBullsAndCowsNumber.GuessesCount);
+                    renderer.Write(NumberGuessedWithoutCheats, 
+                        currentBullsAndCowsNumber.GuessesCount, currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
+
+                    scoreBoard.AddScore(this.players[this.currentPlayerIndex].Name, currentBullsAndCowsNumber.GuessesCount);
                     scoreBoard.SaveToFile();
                 }
                 else
@@ -181,14 +182,19 @@
         public void NextTurn()
         {
             IPlayer currentPlayer = GetCurrentPlayer();
-            renderer.Write("{0} Enter your guess or command: {1}", this.players[this.currentPlayerIndex].Name, bullsAndCowsNumbers[currentPlayerIndex]);
+            // TODO: Needs refactoring
+            renderer.Write("{0} Enter your guess or command: {1} ", this.players[this.currentPlayerIndex].Name, this.bullsAndCowsNumbers[this.currentPlayerIndex]);
             string currentPlayerInput = currentPlayer.GetInput();
             this.HandleUserInput(currentPlayerInput);
         }
 
         private IPlayer GetCurrentPlayer()
         {
-            // TODO: If players count == 0 return
+            // TODO: return something or exception??
+            if (this.players.Count == 0)
+            {
+                throw new ArgumentException("There are no active players!");
+            }
             IPlayer currentPlayer = players[this.currentPlayerIndex];
             return currentPlayer;
         }
