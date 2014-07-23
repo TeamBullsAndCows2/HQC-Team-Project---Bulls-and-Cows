@@ -17,7 +17,7 @@
         {
             gameManager.Renderer.WriteLine();
             gameManager.Renderer.WriteLine(GameManager.WelcomeMessage);
-            gameManager.BullsAndCowsNumbers[gameManager.CurrentPlayerIndex] = new BullsAndCowsNumber();
+            gameManager.StartNewGame();
         }
     }
 }

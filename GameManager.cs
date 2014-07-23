@@ -31,7 +31,6 @@
         private ICommandHandler commandHandler;
 
 
-        public bool IsRunning { get; set; }
 
         public GameManager(IRenderer renderer, IInputManager inputManager)
         {
@@ -44,6 +43,16 @@
             this.randomGenerator = RandomGenerator.Instance;
             this.bullsAndCowsNumbers = new List<BullsAndCowsNumber>();
             this.commandHandler = InitializeCommandHandler();
+        }
+
+        public bool IsRunning { get; set; }
+
+        public IInputManager InputManager
+        {
+            get
+            {
+                return this.inputManager;
+            }
         }
 
         public IRenderer Renderer
@@ -74,7 +83,7 @@
                 this.currentPlayerIndex = value;
             }
         }
-        
+
         public ScoreBoard ScoreBoard
         {
             get
@@ -120,16 +129,15 @@
             if (guessResult.Bulls < 4)
             {
                 renderer.WriteLine("{0} {1}", WrongNumberMessage, guessResult);
-
-                // TODO: NOT HERE!
-                this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
+                NextPlayer();
+                PlayTurn();
             }
             else
             {
 
                 if (currentBullsAndCowsNumber.Cheats == 0)
                 {
-                    renderer.Write(NumberGuessedWithoutCheats, 
+                    renderer.Write(NumberGuessedWithoutCheats,
                         currentBullsAndCowsNumber.GuessesCount, currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
 
                     scoreBoard.AddScore(this.players[this.currentPlayerIndex].Name, currentBullsAndCowsNumber.GuessesCount);
@@ -179,13 +187,27 @@
             this.bullsAndCowsNumbers.Add(new BullsAndCowsNumber());
         }
 
-        public void NextTurn()
+        public void StartNewGame() {
+            for (int i = 0; i < this.players.Count; i++)
+            {
+                this.bullsAndCowsNumbers[i] = new BullsAndCowsNumber();
+            }
+        }
+
+        public void NextPlayer()
+        {
+            // switch the player
+            this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
+        }
+
+        public void PlayTurn()
         {
             IPlayer currentPlayer = GetCurrentPlayer();
             // TODO: Needs refactoring
             renderer.Write("{0} Enter your guess or command: {1} ", this.players[this.currentPlayerIndex].Name, this.bullsAndCowsNumbers[this.currentPlayerIndex]);
             string currentPlayerInput = currentPlayer.GetInput();
             this.HandleUserInput(currentPlayerInput);
+
         }
 
         private IPlayer GetCurrentPlayer()
@@ -195,6 +217,7 @@
             {
                 throw new ArgumentException("There are no active players!");
             }
+
             IPlayer currentPlayer = players[this.currentPlayerIndex];
             return currentPlayer;
         }

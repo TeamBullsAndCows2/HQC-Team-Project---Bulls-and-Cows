@@ -33,7 +33,7 @@ namespace BullsAndCows
 
             while (manager.IsRunning)
             {
-                manager.NextTurn();
+                manager.PlayTurn();
             }
 
             // Scores
