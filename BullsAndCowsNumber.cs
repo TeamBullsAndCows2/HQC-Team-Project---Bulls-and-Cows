@@ -7,6 +7,10 @@
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// The class generates the random number to be guessed.
+    /// </summary>
+
     public class BullsAndCowsNumber
     {
         IRandomGenerator randomGenerator;

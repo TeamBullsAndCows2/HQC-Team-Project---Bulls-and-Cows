@@ -6,6 +6,10 @@
     using System.Text;
     using System.IO;
 
+    /// <summary>
+    /// The class represents the scoreboard - highscores by players.
+    /// </summary>
+
     public class ScoreBoard
     {
         private SortedSet<GameScore> scores;
@@ -47,6 +51,11 @@
             return scores;
         }
 
+        /// <summary>
+        /// Adds a player score to the scoreboard
+        /// </summary>
+        /// <param name="name">The name of the player</param>
+        /// <param name="guesses">Number of attempts to guess</param>
         public void AddScore(string name, int guesses)
         {
             GameScore newScore = new GameScore(name, guesses);

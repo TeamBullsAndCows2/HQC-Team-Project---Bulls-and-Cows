@@ -7,6 +7,9 @@
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// The GameManager class contains the game logic.
+    /// </summary>
     public class GameManager
     {
         public const string ScoresFile = "scores.txt";

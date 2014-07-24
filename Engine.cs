@@ -7,6 +7,10 @@ namespace BullsAndCows
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// The Engine runs the game, relying on the GameManager.
+    /// </summary>
+
     public class Engine
     {
         private readonly GameManager manager;

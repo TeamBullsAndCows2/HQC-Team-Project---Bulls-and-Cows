@@ -7,6 +7,9 @@ namespace BullsAndCows
     using BullsAndCows.Interfaces;
     using BullsAndCows.Tools;
 
+    /// <summary>
+    /// This is the main method, it relies on the Engine to start the game.
+    /// </summary>
     public class Program
     {
         public static void Main()

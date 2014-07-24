@@ -2,6 +2,10 @@
 {
     using System;
 
+
+    /// <summary>
+    /// The class manages the number of bulls and cows to be returned to the player.
+    /// </summary>
     public struct Result
     {
         public int Bulls { get; set; }

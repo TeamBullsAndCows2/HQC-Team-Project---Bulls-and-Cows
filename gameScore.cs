@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// The class deals with the players' scores and their rating .
+    /// </summary>
     public class GameScore : IComparable
     {
         public GameScore(string name, int guesses)

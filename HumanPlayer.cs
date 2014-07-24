@@ -6,6 +6,9 @@ namespace BullsAndCows
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// The class reads user's input for player name.
+    /// </summary>
     public class HumanPlayer : IPlayer
     {
         private string name;
