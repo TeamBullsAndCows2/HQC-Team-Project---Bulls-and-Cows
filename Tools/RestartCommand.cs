@@ -4,11 +4,11 @@
 
     public class RestartCommand : Command
     {
-        private const string name = "restart";
-        private GameManager gameManager;
+        private const string Name = "restart";
+        private readonly GameManager gameManager;
 
         public RestartCommand(GameManager gameManager)
-            : base(name)
+            : base(Name)
         {
             this.gameManager = gameManager;
         }

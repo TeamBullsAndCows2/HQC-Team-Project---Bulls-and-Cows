@@ -7,7 +7,6 @@
     {
         public ConsoleRenderer()
         { 
-        
         }
 
         public void Write(Object message)

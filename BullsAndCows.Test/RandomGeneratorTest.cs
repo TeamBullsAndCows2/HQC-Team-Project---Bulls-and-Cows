@@ -7,7 +7,6 @@
     /// <summary>
     /// Test class for the RandomGenerator class.
     /// </summary>
-
     [TestClass]
     public class RandomGeneratorTest
     {

@@ -16,7 +16,7 @@ namespace BullsAndCows
 
         public Engine()
         {
-            manager = new GameManager(new ConsoleRenderer(), new ConsoleInputManager());
+            this.manager = new GameManager(new ConsoleRenderer(), new ConsoleInputManager());
         }
 
         public void Start()
@@ -35,9 +35,9 @@ namespace BullsAndCows
             Console.WriteLine(GameManager.WelcomeMessage);
             Console.WriteLine();
 
-            while (manager.IsRunning)
+            while (this.manager.IsRunning)
             {
-                manager.PlayTurn();
+                this.manager.PlayTurn();
             }
 
             // Scores

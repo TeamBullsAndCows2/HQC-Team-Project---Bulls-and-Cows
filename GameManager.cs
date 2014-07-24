@@ -1,11 +1,11 @@
 ﻿namespace BullsAndCows
 {
-    using BullsAndCows.Interfaces;
-    using BullsAndCows.Tools;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BullsAndCows.Interfaces;
+    using BullsAndCows.Tools;
 
     /// <summary>
     /// The GameManager class contains the game logic.
@@ -22,6 +22,7 @@
         private IRenderer renderer;
         private IInputManager inputManager;
         private IRandomGenerator randomGenerator;
+
         // private BullsAndCowsNumber bullsAndCowsNumber = new BullsAndCowsNumber();
         private IList<BullsAndCowsNumber> bullsAndCowsNumbers;
         private ScoreBoard scoreBoard;
@@ -41,9 +42,14 @@
             this.players = new List<IPlayer>();
             this.randomGenerator = RandomGenerator.Instance;
             this.bullsAndCowsNumbers = new List<BullsAndCowsNumber>();
-            this.commandHandler = InitializeCommandHandler();
+            this.commandHandler = this.InitializeCommandHandler();
         }
-        public bool IsRunning { get; set; }
+
+        public bool IsRunning 
+        { 
+            get; 
+            set; 
+        }
 
         public IInputManager InputManager
         {
@@ -103,7 +109,7 @@
         {
             if (BullsAndCowsNumber.IsValidNumber(playerInput))
             {
-                HandleGuessNumberCommand(playerInput);
+                this.HandleGuessNumberCommand(playerInput);
             }
             else
             {
@@ -112,7 +118,14 @@
         }
 
         // TODO: Should be added in the CommandHandle after tefactoring
-        // TODO: Refacture and split
+        // TODO: Refacture and split  
+        internal void addPlayer(IPlayer player)
+        {
+            // TODO: IPlayer validation
+            this.players.Add(player);
+            this.bullsAndCowsNumbers.Add(new BullsAndCowsNumber());
+        }
+
         private void HandleGuessNumberCommand(string number)
         {
             if (!BullsAndCowsNumber.IsValidNumber(number))
@@ -126,20 +139,21 @@
 
             if (guessResult.Bulls < 4)
             {
-                renderer.WriteLine("{0} {1}", WrongNumberMessage, guessResult);
-                NextPlayer();
-                PlayTurn();
+                this.renderer.WriteLine("{0} {1}", WrongNumberMessage, guessResult);
+                this.NextPlayer();
+                this.PlayTurn();
             }
             else
             {
-
                 if (currentBullsAndCowsNumber.Cheats == 0)
                 {
-                    renderer.Write(NumberGuessedWithoutCheats,
-                        currentBullsAndCowsNumber.GuessesCount, currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
+                    this.renderer.Write(
+                        NumberGuessedWithoutCheats,
+                        currentBullsAndCowsNumber.GuessesCount, 
+                        currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
 
-                    scoreBoard.AddScore(this.players[this.currentPlayerIndex].Name, currentBullsAndCowsNumber.GuessesCount);
-                    scoreBoard.SaveToFile();
+                    this.scoreBoard.AddScore(this.players[this.currentPlayerIndex].Name, currentBullsAndCowsNumber.GuessesCount);
+                    this.scoreBoard.SaveToFile();
                 }
                 else
                 {
@@ -173,18 +187,10 @@
 
         private void SavePlayerScore()
         {
-
         }
 
-        internal void addPlayer(IPlayer player)
+        public void StartNewGame() 
         {
-            // TODO: IPlayer validation
-
-            this.players.Add(player);
-            this.bullsAndCowsNumbers.Add(new BullsAndCowsNumber());
-        }
-
-        public void StartNewGame() {
             for (int i = 0; i < this.players.Count; i++)
             {
                 this.bullsAndCowsNumbers[i] = new BullsAndCowsNumber();
@@ -200,12 +206,13 @@
         public void PlayTurn()
         {
             IPlayer currentPlayer = GetCurrentPlayer();
+
             // TODO: Needs refactoring
             renderer.Write("{0}, enter your guess or command: ", this.players[this.currentPlayerIndex].Name); 
-            //in the previous line add a placefolder and this.bullsAndCowsNumbers[this.currentPlayerIndex] to see the number;
+
+            // in the previous line add a placefolder and this.bullsAndCowsNumbers[this.currentPlayerIndex] to see the number;
             string currentPlayerInput = currentPlayer.GetInput();
             this.HandleUserInput(currentPlayerInput);
-
         }
 
         private IPlayer GetCurrentPlayer()

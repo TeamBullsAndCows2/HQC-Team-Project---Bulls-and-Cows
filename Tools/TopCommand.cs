@@ -4,11 +4,11 @@
 
     public class TopCommand : Command
     {
-        private const string name = "top";
-        private GameManager gameManager;
+        private const string Name = "top";
+        private readonly GameManager gameManager;
 
         public TopCommand(GameManager gameManager)
-            : base(name)
+            : base(Name)
         {
             this.gameManager = gameManager;
         }
