@@ -19,12 +19,10 @@
         public const string NumberGuessedWithoutCheats = "Congratulations! You guessed the secret number in {0} {1}.\nPlease enter your name for the top scoreboard: ";
         public const string NumberGuessedWithCheats = "Congratulations! You guessed the secret number in {0} {1} and {2} {3}.\nYou are not allowed to enter the top scoreboard.";
         public const string GoodBuyMessage = "Good bye!";
-
-
         private IRenderer renderer;
         private IInputManager inputManager;
         private IRandomGenerator randomGenerator;
-        //private BullsAndCowsNumber bullsAndCowsNumber = new BullsAndCowsNumber();
+        // private BullsAndCowsNumber bullsAndCowsNumber = new BullsAndCowsNumber();
         private IList<BullsAndCowsNumber> bullsAndCowsNumbers;
         private ScoreBoard scoreBoard;
         private List<IPlayer> players;
@@ -32,8 +30,6 @@
         // TODO: Should be refactored to use a CurrentUser abstraction not indexex.
         private int currentPlayerIndex;
         private ICommandHandler commandHandler;
-
-
 
         public GameManager(IRenderer renderer, IInputManager inputManager)
         {
@@ -47,7 +43,6 @@
             this.bullsAndCowsNumbers = new List<BullsAndCowsNumber>();
             this.commandHandler = InitializeCommandHandler();
         }
-
         public bool IsRunning { get; set; }
 
         public IInputManager InputManager
@@ -162,7 +157,6 @@
                 currentBullsAndCowsNumber = new BullsAndCowsNumber();
             }
         }
-
 
         private ICommandHandler InitializeCommandHandler()
         {

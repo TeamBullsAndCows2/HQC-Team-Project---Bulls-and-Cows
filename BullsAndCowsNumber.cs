@@ -1,16 +1,15 @@
 ﻿namespace BullsAndCows
-{
-    using BullsAndCows.Interfaces;
-    using BullsAndCows.Tools;
+{   
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BullsAndCows.Interfaces;
+    using BullsAndCows.Tools;
 
     /// <summary>
     /// The class generates the random number to be guessed.
     /// </summary>
-
     public class BullsAndCowsNumber
     {
         IRandomGenerator randomGenerator;
@@ -19,8 +18,8 @@
 
         public BullsAndCowsNumber()
         {
-            randomGenerator = RandomGenerator.Instance;
-            cheatNumber = new char[4] { 'X', 'X', 'X', 'X' };
+            this.randomGenerator = RandomGenerator.Instance;
+            this.cheatNumber = new char[4] { 'X', 'X', 'X', 'X' };
             this.number = new int[4];
             this.Cheats = 0;
             this.GuessesCount = 0;
@@ -65,32 +64,33 @@
             {
                 while (true)
                 {
-                    int randPossition = randomGenerator.GetValue(0, 3);
-                    if (cheatNumber[randPossition] == 'X')
+                    int randPossition = this.randomGenerator.GetValue(0, 3);
+                    if (this.cheatNumber[randPossition] == 'X')
                     {
                         switch (randPossition)
                         {
-                            case 0: 
-                                cheatNumber[randPossition] = (char)(number[0] + '0');
+                            case 0:
+                                this.cheatNumber[randPossition] = (char)(this.number[0] + '0');
                                 break;
                             case 1:
-                                cheatNumber[randPossition] = (char)(number[1] + '0');
+                                this.cheatNumber[randPossition] = (char)(this.number[1] + '0');
                                 break;
                             case 2:
-                                cheatNumber[randPossition] = (char)(number[2] + '0');
+                                this.cheatNumber[randPossition] = (char)(this.number[2] + '0');
                                 break;
                             case 3:
-                                cheatNumber[randPossition] = (char)(number[3] + '0');
+                                this.cheatNumber[randPossition] = (char)(this.number[3] + '0');
                                 break;
                         }
+
                         break;
                     }
                 }
 
-                Cheats++;
+                this.Cheats++;
             }
 
-            return new String(cheatNumber);
+            return new string(this.cheatNumber);
         }
 
         // Engine?
@@ -100,12 +100,50 @@
             {
                 throw new ArgumentException("Invalid string number");
             }
+
             int[] numberToGuess = new int[4];
             numberToGuess[0] = number[0] - '0';
             numberToGuess[1] = number[1] - '0';
             numberToGuess[2] = number[2] - '0';
             numberToGuess[3] = number[3] - '0';
-            return TryToGuess(numberToGuess);
+            return this.TryToGuess(numberToGuess);
+        }
+       
+        // Engine
+        public override string ToString()
+        {
+            StringBuilder numberStringBuilder = new StringBuilder();
+
+            for (int i = 0; i < this.number.Length; i++)
+            {
+                numberStringBuilder.Append(this.number[i]);
+            }
+
+            return numberStringBuilder.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            BullsAndCowsNumber objectToCompare = obj as BullsAndCowsNumber;
+            if (objectToCompare == null)
+            {
+                return false;
+            }
+            else
+            {
+                return this.number[0] == objectToCompare.number[0] &&
+                        this.number[1] == objectToCompare.number[1] &&
+                        this.number[2] == objectToCompare.number[2] &&
+                        this.number[3] == objectToCompare.number[3];
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return this.number[0].GetHashCode() ^
+                this.number[1].GetHashCode() ^
+                this.number[2].GetHashCode() ^
+                this.number[3].GetHashCode();
         }
 
         private Result TryToGuess(int[] numberToGuess)
@@ -154,51 +192,14 @@
             return guessResult;
         }
 
-        // Engine
         private void GenerateRandomNumbers()
         {
-            this.number[0] = randomGenerator.GetValue(1, 9);
+            this.number[0] = this.randomGenerator.GetValue(1, 9);
 
             for (int i = 1; i < this.number.Length; i++)
             {
-                this.number[i] = randomGenerator.GetValue(0, 9);
+                this.number[i] = this.randomGenerator.GetValue(0, 9);
             }
-        }
-
-        public override string ToString()
-        {
-            StringBuilder numberStringBuilder = new StringBuilder();
-
-            for (int i = 0; i < this.number.Length; i++)
-            {
-                numberStringBuilder.Append(this.number[i]);
-            }
-
-            return numberStringBuilder.ToString();
-        }
-
-        public override bool Equals(object obj)
-        {
-            BullsAndCowsNumber objectToCompare = obj as BullsAndCowsNumber;
-            if (objectToCompare == null)
-            {
-                return false;
-            }
-            else
-            {
-                return (this.number[0] == objectToCompare.number[0] &&
-                        this.number[1] == objectToCompare.number[1] &&
-                        this.number[2] == objectToCompare.number[2] &&
-                        this.number[3] == objectToCompare.number[3]);
-            }
-        }
-
-        public override int GetHashCode()
-        {
-            return this.number[0].GetHashCode() ^
-                this.number[1].GetHashCode() ^
-                this.number[2].GetHashCode() ^
-                this.number[3].GetHashCode();
         }
     }
 }

@@ -1,8 +1,12 @@
 ﻿namespace BullsAndCows.Test
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BullsAndCows.Tools;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    /// <summary>
+    /// Test class for the RandomGenerator class.
+    /// </summary>
 
     [TestClass]
     public class RandomGeneratorTest
@@ -30,7 +34,7 @@
         {
             var generator = RandomGenerator.Instance;
             var generatorValue = generator.GetValue(1, 2);
-            int[] oneAndTwo = {1, 2};
+            int[] oneAndTwo = { 1, 2 };
         }
     }
 }
