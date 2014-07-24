@@ -18,18 +18,19 @@ namespace BullsAndCows
 
         public void Start()
         {
-            Console.Write("Enter name: ");
+            Console.Write("Enter name for Player 1: ");
             string name = Console.ReadLine();
             IPlayer player = new HumanPlayer(name);
             manager.addPlayer(player);
 
-            Console.Write("Enter name2: ");
+            Console.Write("Enter name for Player 2: ");
             string name2 = Console.ReadLine();
             IPlayer player2 = new HumanPlayer(name2);
             manager.addPlayer(player2);
 
             /// Show splash screen
-            Console.WriteLine("WelcomeMessage");
+            Console.WriteLine(GameManager.WelcomeMessage);
+            Console.WriteLine();
 
             while (manager.IsRunning)
             {

@@ -10,7 +10,7 @@
     public class GameManager
     {
         public const string ScoresFile = "scores.txt";
-        public const string WelcomeMessage = "Welcome to “Bulls and Cows” game. Please try to guess my secret 4-digit number.\nUse 'top' to view the top scoreboard, 'restart' to start a new game and 'help' to cheat and 'exit' to quit the game.";
+        public const string WelcomeMessage = "Welcome to “Bulls and Cows” game! Please try to guess my secret 4-digit number.\nUse 'top' to view the top scoreboard, 'restart' to start a new game and 'help' to cheat and 'exit' to quit the game.";
         public const string WrongNumberMessage = "Wrong number!";
         public const string InvalidCommandMessage = "Incorrect guess or command!";
         public const string NumberGuessedWithoutCheats = "Congratulations! You guessed the secret number in {0} {1}.\nPlease enter your name for the top scoreboard: ";
@@ -204,7 +204,8 @@
         {
             IPlayer currentPlayer = GetCurrentPlayer();
             // TODO: Needs refactoring
-            renderer.Write("{0} Enter your guess or command: {1} ", this.players[this.currentPlayerIndex].Name, this.bullsAndCowsNumbers[this.currentPlayerIndex]);
+            renderer.Write("{0}, enter your guess or command: ", this.players[this.currentPlayerIndex].Name); 
+            //in the previous line add a placefolder and this.bullsAndCowsNumbers[this.currentPlayerIndex] to see the number;
             string currentPlayerInput = currentPlayer.GetInput();
             this.HandleUserInput(currentPlayerInput);
 
