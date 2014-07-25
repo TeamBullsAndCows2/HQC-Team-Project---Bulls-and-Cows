@@ -13,27 +13,29 @@ namespace BullsAndCows
     public class Engine
     {
         private readonly GameManager manager;
+        private IRenderer renderer = new ConsoleRenderer();
+        private IInputManager inputManager = new ConsoleInputManager();
 
         public Engine()
         {
-            this.manager = new GameManager(new ConsoleRenderer(), new ConsoleInputManager());
+            this.manager = new GameManager(renderer, inputManager);
         }
 
         public void Start()
         {
-            Console.Write("Enter name for Player 1: ");
-            string name = Console.ReadLine();
+            renderer.Write("Enter name for Player 1: ");
+            string name = inputManager.GetUserInput();
             IPlayer player = new HumanPlayer(name);
             this.manager.addPlayer(player);
 
-            Console.Write("Enter name for Player 2: ");
-            string name2 = Console.ReadLine();
+            renderer.Write("Enter name for Player 2: ");
+            string name2 = inputManager.GetUserInput();
             IPlayer player2 = new HumanPlayer(name2);
             this.manager.addPlayer(player2);
 
             // Show splash screen
-            Console.WriteLine(GameManager.WelcomeMessage);
-            Console.WriteLine();
+            renderer.WriteLine(GameManager.WelcomeMessage);
+            renderer.WriteLine();
 
             while (this.manager.IsRunning)
             {
