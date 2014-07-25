@@ -135,6 +135,14 @@
             this.HandleUserInput(currentPlayerInput);
         }
 
+        public void StartNewGame()
+        {
+            for (int i = 0; i < this.players.Count; i++)
+            {
+                this.bullsAndCowsNumbers[i] = new BullsAndCowsNumber();
+            }
+        }
+
         internal void addPlayer(IPlayer player)
         {
             // TODO: IPlayer validation
@@ -205,14 +213,6 @@
 
         private void SavePlayerScore()
         {
-        }
-
-        public void StartNewGame()
-        {
-            for (int i = 0; i < this.players.Count; i++)
-            {
-                this.bullsAndCowsNumbers[i] = new BullsAndCowsNumber();
-            }
         }
 
         private IPlayer GetCurrentPlayer()

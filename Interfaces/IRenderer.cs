@@ -4,11 +4,11 @@
 
     public interface IRenderer
     {
-        void Write(Object message);
-        void Write(string message, params Object[] words);
+        void Write(object message);
+        void Write(string message, params object[] words);
 
-        void WriteLine(Object message);
+        void WriteLine(object message);
         void WriteLine();
-        void WriteLine(string message, params Object[] words);
+        void WriteLine(string message, params object[] words);
     }
 }

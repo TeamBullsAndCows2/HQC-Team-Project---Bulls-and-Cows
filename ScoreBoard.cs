@@ -12,13 +12,13 @@
 
     public class ScoreBoard
     {
-        private SortedSet<GameScore> scores;
         private const int MaxPlayersToShow = 10;
+        private readonly SortedSet<GameScore> scores;
         private string filename;
 
         public string Filename
         {
-            get { return filename; }
+            get { return this.filename; }
             set { this.filename = value; }
         }
 
@@ -31,7 +31,8 @@
         public SortedSet<GameScore> LoadScoresFromFile(string filename)
         {
             var scores = new SortedSet<GameScore>();
-            // TODO: bullshit try catch should be refactored
+
+            // TODO: messy try catch should be refactored
             try
             {
                 using (StreamReader inputStream = new StreamReader(filename))

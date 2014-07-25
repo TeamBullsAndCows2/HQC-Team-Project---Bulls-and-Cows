@@ -27,7 +27,7 @@ namespace BullsAndCows
 
             private set
             {
-                if (String.IsNullOrWhiteSpace(value))
+                if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentNullException("The name cannot be null! Please enter a valid name!");
                 }
