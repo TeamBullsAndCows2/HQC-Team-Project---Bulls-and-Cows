@@ -1,10 +1,10 @@
 namespace BullsAndCows
 {
-    using BullsAndCows.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BullsAndCows.Interfaces;
 
     /// <summary>
     /// The class reads user's input for player name.
@@ -24,6 +24,7 @@ namespace BullsAndCows
             {
                 return this.name;
             }
+
             private set
             {
                 if (String.IsNullOrWhiteSpace(value))

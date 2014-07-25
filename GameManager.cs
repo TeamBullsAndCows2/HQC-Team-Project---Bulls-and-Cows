@@ -116,9 +116,25 @@
                 this.commandHandler.ExecuteCommand(playerInput);
             }
         }
+        
+        public void NextPlayer()
+        {
+            // switch the player
+            this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
+        }
 
-        // TODO: Should be added in the CommandHandle after tefactoring
-        // TODO: Refacture and split  
+        public void PlayTurn()
+        {
+            IPlayer currentPlayer = this.GetCurrentPlayer();
+
+            // TODO: Needs refactoring
+            this.renderer.Write("{0}, enter your guess or command: ", this.players[this.currentPlayerIndex].Name); 
+
+            // in the previous line add a placefolder and this.bullsAndCowsNumbers[this.currentPlayerIndex] to see the number;
+            string currentPlayerInput = currentPlayer.GetInput();
+            this.HandleUserInput(currentPlayerInput);
+        }
+
         internal void addPlayer(IPlayer player)
         {
             // TODO: IPlayer validation
@@ -126,11 +142,13 @@
             this.bullsAndCowsNumbers.Add(new BullsAndCowsNumber());
         }
 
+        // TODO: Should be added in the CommandHandle after refactoring
+        // TODO: Refacture and split  
         private void HandleGuessNumberCommand(string number)
         {
             if (!BullsAndCowsNumber.IsValidNumber(number))
             {
-                renderer.WriteLine(InvalidCommandMessage);
+                this.renderer.WriteLine(InvalidCommandMessage);
                 return;
             }
 
@@ -149,7 +167,7 @@
                 {
                     this.renderer.Write(
                         NumberGuessedWithoutCheats,
-                        currentBullsAndCowsNumber.GuessesCount, 
+                        currentBullsAndCowsNumber.GuessesCount,
                         currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
 
                     this.scoreBoard.AddScore(this.players[this.currentPlayerIndex].Name, currentBullsAndCowsNumber.GuessesCount);
@@ -157,7 +175,7 @@
                 }
                 else
                 {
-                    renderer.WriteLine(
+                    this.renderer.WriteLine(
                         NumberGuessedWithCheats,
                         currentBullsAndCowsNumber.GuessesCount,
                         currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts",
@@ -165,9 +183,9 @@
                         currentBullsAndCowsNumber.Cheats == 1 ? "cheat" : "cheats");
                 }
 
-                renderer.Write(scoreBoard);
-                renderer.WriteLine();
-                renderer.WriteLine(WelcomeMessage);
+                this.renderer.Write(this.scoreBoard);
+                this.renderer.WriteLine();
+                this.renderer.WriteLine(WelcomeMessage);
                 currentBullsAndCowsNumber = new BullsAndCowsNumber();
             }
         }
@@ -189,30 +207,12 @@
         {
         }
 
-        public void StartNewGame() 
+        public void StartNewGame()
         {
             for (int i = 0; i < this.players.Count; i++)
             {
                 this.bullsAndCowsNumbers[i] = new BullsAndCowsNumber();
             }
-        }
-
-        public void NextPlayer()
-        {
-            // switch the player
-            this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
-        }
-
-        public void PlayTurn()
-        {
-            IPlayer currentPlayer = GetCurrentPlayer();
-
-            // TODO: Needs refactoring
-            renderer.Write("{0}, enter your guess or command: ", this.players[this.currentPlayerIndex].Name); 
-
-            // in the previous line add a placefolder and this.bullsAndCowsNumbers[this.currentPlayerIndex] to see the number;
-            string currentPlayerInput = currentPlayer.GetInput();
-            this.HandleUserInput(currentPlayerInput);
         }
 
         private IPlayer GetCurrentPlayer()
@@ -223,7 +223,7 @@
                 throw new ArgumentException("There are no active players!");
             }
 
-            IPlayer currentPlayer = players[this.currentPlayerIndex];
+            IPlayer currentPlayer = this.players[this.currentPlayerIndex];
             return currentPlayer;
         }
     }

@@ -7,15 +7,33 @@
     /// </summary>
     public class GameScore : IComparable
     {
+        public string Name { get; private set; }
+
+        public int Guesses { get; private set; }
+
+        public static GameScore GetGameScore(string data)
+        {
+            string[] dataAsStringArray = data.Split(new string[] { "_:::_" }, StringSplitOptions.None);
+
+            if (dataAsStringArray.Length != 2)
+            {
+                throw new ArgumentException("Data is not in the correct format!");
+            }
+
+            string name = dataAsStringArray[0];
+
+            int guesses = 0;
+
+            int.TryParse(dataAsStringArray[1], out guesses);
+
+            return new GameScore(name, guesses);
+        }
+
         public GameScore(string name, int guesses)
         {
             this.Name = name;
             this.Guesses = guesses;
         }
-
-        public string Name { get; private set; }
-
-        public int Guesses { get; private set; }
 
         public override bool Equals(object obj)
         {
@@ -64,24 +82,6 @@
         public string FormatGameScore()
         {
             return string.Format("{0}_:::_{1}", this.Name, this.Guesses);
-        }
-
-        public static GameScore GetGameScore(string data)
-        {
-            string[] dataAsStringArray = data.Split(new string[] { "_:::_" }, StringSplitOptions.None);
-
-            if (dataAsStringArray.Length != 2)
-            {
-                throw new ArgumentException("Data is not in the correct format!");
-            }
-
-            string name = dataAsStringArray[0];
-
-            int guesses = 0;
-
-            int.TryParse(dataAsStringArray[1], out guesses);
-
-            return new GameScore(name, guesses);
         }
     }
 }

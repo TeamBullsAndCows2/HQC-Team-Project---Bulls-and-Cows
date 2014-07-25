@@ -15,7 +15,7 @@
 
         public override void Execute()
         {
-            gameManager.Renderer.WriteLine(gameManager.ScoreBoard);
+            this.gameManager.Renderer.WriteLine(gameManager.ScoreBoard);
         }
     }
 }
