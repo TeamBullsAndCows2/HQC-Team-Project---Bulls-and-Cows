@@ -66,17 +66,11 @@
         // Engine?
         public Result TryToGuess(string number)
         {
-            if (string.IsNullOrEmpty(number) || number.Trim().Length != 4)
-            {
-                throw new ArgumentException("Invalid string number");
-            }
+            int guessesCount = this.GuessesCount;
+            Result result = Checker.TryToGuess(number, ref guessesCount, this.number);
+            this.GuessesCount = guessesCount;
 
-            int[] numberToGuess = new int[4];
-            numberToGuess[0] = number[0] - '0';
-            numberToGuess[1] = number[1] - '0';
-            numberToGuess[2] = number[2] - '0';
-            numberToGuess[3] = number[3] - '0';
-            return this.TryToGuess(numberToGuess);
+            return result;
         }
        
         // Engine
@@ -114,52 +108,6 @@
                 this.number[1].GetHashCode() ^
                 this.number[2].GetHashCode() ^
                 this.number[3].GetHashCode();
-        }
-
-        private Result TryToGuess(int[] numberToGuess)
-        {
-            for (int i = 0; i < numberToGuess.Length; i++)
-            {
-                if (numberToGuess[i] < 0 || numberToGuess[i] > 9)
-                {
-                    throw new ArgumentException("Invalid digit");
-                }
-            }
-
-            this.GuessesCount++;
-            int bulls = 0;
-            int cows = 0;
-
-            for (int i = 0; i < numberToGuess.Length; i++)
-            {
-                // checks for bulls
-                if (this.number[i] == numberToGuess[i])
-                {
-                    // add a bull
-                    bulls++;
-                }
-                else
-                {
-                    // if this digit is not in the right place
-                    // loop that digit trough the array of the number's digits in searching for cows
-                    for (int j = 0; j < numberToGuess.Length; j++)
-                    {
-                        // if we are not in the current position and
-                        // if the number in the current position is found in the guessed number's array
-                        if (i != j && this.number[i] == numberToGuess[j])
-                        {
-                            // add a cow and break the loop
-                            cows++;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            Result guessResult = new Result();
-            guessResult.Bulls = bulls;
-            guessResult.Cows = cows;
-            return guessResult;
         }
 
         private void GenerateRandomNumbers()

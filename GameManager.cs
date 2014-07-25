@@ -113,7 +113,14 @@
             }
             else
             {
-                this.commandHandler.ExecuteCommand(playerInput);
+                try
+                {
+                    this.commandHandler.ExecuteCommand(playerInput);
+                }
+                catch (ArgumentException exception)
+                {
+                    renderer.WriteLine(exception.Message);
+                }
             }
         }
         
