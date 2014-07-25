@@ -13,23 +13,24 @@
     public class BullsAndCowsNumber
     {
         IRandomGenerator randomGenerator;
-        private char[] cheatNumber;
+        private Cheat cheatNumber;
         private int[] number;
 
         public BullsAndCowsNumber()
         {
             this.randomGenerator = RandomGenerator.Instance;
-            this.cheatNumber = new char[4] { 'X', 'X', 'X', 'X' };
             this.number = new int[4];
-            this.Cheats = 0;
+            this.cheatNumber = new Cheat(number);
             this.GuessesCount = 0;
             this.GenerateRandomNumbers();
         }
 
         public int Cheats
         {
-            get;
-            private set;
+            get
+            {
+                return cheatNumber.Cheats;
+            }
         }
 
         public int GuessesCount
@@ -57,40 +58,9 @@
             return result;
         }
 
-        // Should be in another class whcih deals with Cheats
         public string GetCheat()
         {
-            if (this.Cheats < 4)
-            {
-                while (true)
-                {
-                    int randPossition = this.randomGenerator.GetValue(0, 3);
-                    if (this.cheatNumber[randPossition] == 'X')
-                    {
-                        switch (randPossition)
-                        {
-                            case 0:
-                                this.cheatNumber[randPossition] = (char)(this.number[0] + '0');
-                                break;
-                            case 1:
-                                this.cheatNumber[randPossition] = (char)(this.number[1] + '0');
-                                break;
-                            case 2:
-                                this.cheatNumber[randPossition] = (char)(this.number[2] + '0');
-                                break;
-                            case 3:
-                                this.cheatNumber[randPossition] = (char)(this.number[3] + '0');
-                                break;
-                        }
-
-                        break;
-                    }
-                }
-
-                this.Cheats++;
-            }
-
-            return new string(this.cheatNumber);
+            return cheatNumber.GetCheat();
         }
 
         // Engine?
