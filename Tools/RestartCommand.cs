@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Handles the restart of the game.
+    /// </summary>
     public class RestartCommand : Command
     {
         private const string Name = "restart";

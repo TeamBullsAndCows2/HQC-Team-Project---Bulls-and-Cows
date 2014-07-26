@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Handles user 'top' command.
+    /// </summary>
     public class TopCommand : Command
     {
         private const string Name = "top";

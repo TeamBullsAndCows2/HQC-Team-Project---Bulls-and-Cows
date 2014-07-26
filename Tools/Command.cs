@@ -3,6 +3,9 @@
     using BullsAndCows.Interfaces;
     using System;
 
+    /// <summary>
+    /// Base Command class. All commands should implement it. Implemented using bridge design pattern together with CommandHandler.
+    /// </summary>
     public abstract class Command : ICommand
     {
         private string name;

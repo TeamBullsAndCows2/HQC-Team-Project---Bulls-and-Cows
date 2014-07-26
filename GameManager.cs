@@ -19,16 +19,15 @@
         public const string NumberGuessedWithoutCheats = "Congratulations! You guessed the secret number in {0} {1}.\nPlease enter your name for the top scoreboard: ";
         public const string NumberGuessedWithCheats = "Congratulations! You guessed the secret number in {0} {1} and {2} {3}.\nYou are not allowed to enter the top scoreboard.";
         public const string GoodBuyMessage = "Good bye!";
+
+        private const string handleNumberInput = "handleNumberInput";
         private IRenderer renderer;
         private IInputManager inputManager;
         private IRandomGenerator randomGenerator;
-
-        // private BullsAndCowsNumber bullsAndCowsNumber = new BullsAndCowsNumber();
+        private string currentPlayerInput;
         private IList<BullsAndCowsNumber> bullsAndCowsNumbers;
         private ScoreBoard scoreBoard;
         private List<IPlayer> players;
-
-        // TODO: Should be refactored to use a CurrentUser abstraction not indexex.
         private int currentPlayerIndex;
         private ICommandHandler commandHandler;
 
@@ -45,10 +44,10 @@
             this.commandHandler = this.InitializeCommandHandler();
         }
 
-        public bool IsRunning 
-        { 
-            get; 
-            set; 
+        public bool IsRunning
+        {
+            get;
+            set;
         }
 
         public IInputManager InputManager
@@ -104,26 +103,23 @@
             }
         }
 
-        // TODO: Think for better name!
         public void HandleUserInput(string playerInput)
         {
             if (BullsAndCowsNumber.IsValidNumber(playerInput))
             {
-                this.HandleGuessNumberCommand(playerInput);
+                playerInput = handleNumberInput;
             }
-            else
+
+            try
             {
-                try
-                {
-                    this.commandHandler.ExecuteCommand(playerInput);
-                }
-                catch (ArgumentException exception)
-                {
-                    renderer.WriteLine(exception.Message);
-                }
+                this.commandHandler.ExecuteCommand(playerInput);
+            }
+            catch (ArgumentException exception)
+            {
+                renderer.WriteLine(exception.Message);
             }
         }
-        
+
         public void NextPlayer()
         {
             // switch the player
@@ -135,11 +131,16 @@
             IPlayer currentPlayer = this.GetCurrentPlayer();
 
             // TODO: Needs refactoring
-            this.renderer.Write("{0}, enter your guess or command: ", this.players[this.currentPlayerIndex].Name); 
+            this.renderer.Write("{0}, enter your guess or command: ", this.players[this.currentPlayerIndex].Name);
 
             // in the previous line add a placefolder and this.bullsAndCowsNumbers[this.currentPlayerIndex] to see the number;
-            string currentPlayerInput = currentPlayer.GetInput();
-            this.HandleUserInput(currentPlayerInput);
+            this.currentPlayerInput = currentPlayer.GetInput();
+            this.HandleUserInput(this.currentPlayerInput);
+        }
+
+        public string GetCurrentPlayerInput()
+        {
+            return this.currentPlayerInput;
         }
 
         public void StartNewGame()
@@ -157,69 +158,22 @@
             this.bullsAndCowsNumbers.Add(new BullsAndCowsNumber());
         }
 
-        // TODO: Should be added in the CommandHandle after refactoring
-        // TODO: Refacture and split  
-        private void HandleGuessNumberCommand(string number)
-        {
-            if (!BullsAndCowsNumber.IsValidNumber(number))
-            {
-                this.renderer.WriteLine(InvalidCommandMessage);
-                return;
-            }
-
-            BullsAndCowsNumber currentBullsAndCowsNumber = this.bullsAndCowsNumbers[this.currentPlayerIndex];
-            Result guessResult = currentBullsAndCowsNumber.TryToGuess(number);
-
-            if (guessResult.Bulls < 4)
-            {
-                this.renderer.WriteLine("{0} {1}", WrongNumberMessage, guessResult);
-                this.NextPlayer();
-                this.PlayTurn();
-            }
-            else
-            {
-                if (currentBullsAndCowsNumber.Cheats == 0)
-                {
-                    this.renderer.Write(
-                        NumberGuessedWithoutCheats,
-                        currentBullsAndCowsNumber.GuessesCount,
-                        currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts");
-
-                    this.scoreBoard.AddScore(this.players[this.currentPlayerIndex].Name, currentBullsAndCowsNumber.GuessesCount);
-                    this.scoreBoard.SaveToFile();
-                }
-                else
-                {
-                    this.renderer.WriteLine(
-                        NumberGuessedWithCheats,
-                        currentBullsAndCowsNumber.GuessesCount,
-                        currentBullsAndCowsNumber.GuessesCount == 1 ? "attempt" : "attempts",
-                        currentBullsAndCowsNumber.Cheats,
-                        currentBullsAndCowsNumber.Cheats == 1 ? "cheat" : "cheats");
-                }
-
-                this.renderer.Write(this.scoreBoard);
-                this.renderer.WriteLine();
-                this.renderer.WriteLine(WelcomeMessage);
-                currentBullsAndCowsNumber = new BullsAndCowsNumber();
-            }
-        }
-
         private ICommandHandler InitializeCommandHandler()
         {
             var commandHandler = new CommandHandler();
 
-            // using this for ease of use can be more granular e.g multiple different parameters
             commandHandler.AddCommand(new RestartCommand(this));
             commandHandler.AddCommand(new ExitCommand(this));
             commandHandler.AddCommand(new HelpCommand(this));
             commandHandler.AddCommand(new TopCommand(this));
+            commandHandler.AddCommand(new HandleNumberCommand(this));
 
             return commandHandler;
         }
 
         private void SavePlayerScore()
         {
+            throw new NotImplementedException();
         }
 
         private IPlayer GetCurrentPlayer()

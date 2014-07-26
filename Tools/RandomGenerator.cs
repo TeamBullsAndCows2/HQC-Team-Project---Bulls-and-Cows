@@ -3,6 +3,9 @@
     using System;
     using BullsAndCows.Interfaces;
 
+    /// <summary>
+    /// Singleton Random generator class.
+    /// </summary>
     public sealed class RandomGenerator : IRandomGenerator
     {
         private static readonly RandomGenerator instance = new RandomGenerator();

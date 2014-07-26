@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Handles 'exit' user command.
+    /// </summary>
     class ExitCommand : Command
     {
         private const string name = "exit";

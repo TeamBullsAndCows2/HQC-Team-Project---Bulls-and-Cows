@@ -4,6 +4,9 @@
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Responsible for executing all commands in the game manager. Implemented via Bridge pattern together with the Command abstract class.
+    /// </summary>
     public class CommandHandler : ICommandHandler
     {
         private Dictionary<string, ICommand> commands;

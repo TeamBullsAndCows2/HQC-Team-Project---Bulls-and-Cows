@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Handles user 'help' command.
+    /// </summary>
     class HelpCommand : Command
     {
         private const string name = "help";

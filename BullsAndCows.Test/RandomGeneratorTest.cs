@@ -28,12 +28,5 @@
             Assert.AreEqual(oneNMumber, generator.GetValue(1, 1));
         }
 
-        [TestMethod]
-        public void CheckForNumberInIntervalTest()
-        {
-            var generator = RandomGenerator.Instance;
-            var generatorValue = generator.GetValue(1, 2);
-            int[] oneAndTwo = { 1, 2 };
-        }
     }
 }
