@@ -1,6 +1,5 @@
 ﻿namespace BullsAndCows.Common.Test
 {
-    using System;
     using BullsAndCows.Common.Tools;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +22,7 @@
         public void CheckForNumberGenerationTest()
         {
             var generator = RandomGenerator.Instance;
-            var oneNMumber = 1;
+            const int oneNMumber = 1;
 
             Assert.AreEqual(oneNMumber, generator.GetValue(1, 1));
         }
