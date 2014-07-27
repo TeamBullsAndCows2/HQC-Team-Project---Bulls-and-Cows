@@ -40,5 +40,16 @@ namespace BullsAndCows.Common.Test
             Assert.AreEqual(result.Bulls, 4);
             Assert.AreEqual(result.Cows, 0);
         }
+
+        [TestMethod]
+        public void TestFourCows()
+        {
+            int guesses = 0;
+            Result result = Checker.TryToGuess("4321", ref guesses, new int[] { 1, 2, 3, 4 });
+
+            Assert.AreEqual(guesses, 1);
+            Assert.AreEqual(result.Bulls, 0);
+            Assert.AreEqual(result.Cows, 4);
+        }
     }
 }
