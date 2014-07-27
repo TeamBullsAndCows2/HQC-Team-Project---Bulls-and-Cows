@@ -3,6 +3,9 @@
     using BullsAndCows.Interfaces;
     using System;
 
+    /// <summary>
+    /// Displays the game messages on the console.
+    /// </summary>
     public class ConsoleRenderer : IRenderer
     {
         public ConsoleRenderer()

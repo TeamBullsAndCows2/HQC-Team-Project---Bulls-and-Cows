@@ -36,6 +36,10 @@ namespace BullsAndCows
             }
         }
 
+        /// <summary>
+        /// Gets the input from the console.
+        /// </summary>
+        /// <returns>Returns the input in a correct format.</returns>
         public string GetInput()
         {
             // TODO: Refactor

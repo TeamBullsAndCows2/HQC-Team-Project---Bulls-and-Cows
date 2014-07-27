@@ -27,6 +27,5 @@
 
             Assert.AreEqual(oneNMumber, generator.GetValue(1, 1));
         }
-
     }
 }

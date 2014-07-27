@@ -9,7 +9,6 @@
     /// <summary>
     /// The class represents the scoreboard - highscores by players.
     /// </summary>
-
     public class ScoreBoard
     {
         private const int MaxPlayersToShow = 10;
@@ -28,6 +27,11 @@
             this.scores = LoadScoresFromFile(this.Filename);
         }
 
+        /// <summary>
+        /// Reads the game scores from an external file.
+        /// </summary>
+        /// <param name="filename">Name of the file, containing the highscores.</param>
+        /// <returns>Return the scores.</returns>
         public SortedSet<GameScore> LoadScoresFromFile(string filename)
         {
             var scores = new SortedSet<GameScore>();
@@ -63,6 +67,9 @@
             this.scores.Add(newScore);
         }
 
+        /// <summary>
+        /// Saves game scores in an external file.
+        /// </summary>
         public void SaveToFile()
         {
             // TODO: bullshit try catch should be refactored
@@ -82,6 +89,10 @@
             }
         }
 
+        /// <summary>
+        /// Displays the scoreboard.
+        /// </summary>
+        /// <returns>Returns the scoreboard data in the correct format.</returns>
         public override string ToString()
         {
             var lines = this.scores.Take(MaxPlayersToShow);

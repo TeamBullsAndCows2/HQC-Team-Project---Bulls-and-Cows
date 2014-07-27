@@ -1,12 +1,15 @@
 ﻿namespace BullsAndCows
 {
+    using BullsAndCows.Interfaces;
+    using BullsAndCows.Tools;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using BullsAndCows.Interfaces;
-    using BullsAndCows.Tools;
     
+    /// <summary>
+    /// A class for the "help", its display and cheat counts. 
+    /// </summary>
     public class Cheat
     {
         private IRandomGenerator randomGenerator;
@@ -27,6 +30,10 @@
             private set;
         }
 
+        /// <summary>
+        /// Checks for the number of "help" usages.
+        /// </summary>
+        /// <returns>The random generaed number partially revealed.</returns>
         public string GetCheat()
         {
             if (this.Cheats < 4)

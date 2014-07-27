@@ -16,6 +16,9 @@
             this.gameManager = gameManager;
         }
 
+        /// <summary>
+        /// Executes the restart command and starts a new game.
+        /// </summary>
         public override void Execute()
         {
             gameManager.Renderer.WriteLine();

@@ -16,6 +16,9 @@
             this.gameManager = gameManager;
         }
 
+        /// <summary>
+        /// Executes the "top" command and displays the scoreboard.
+        /// </summary>
         public override void Execute()
         {
             this.gameManager.Renderer.WriteLine(gameManager.ScoreBoard);

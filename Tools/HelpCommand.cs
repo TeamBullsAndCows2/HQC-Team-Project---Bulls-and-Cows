@@ -3,19 +3,22 @@
     using System;
 
     /// <summary>
-    /// Handles user 'help' command.
+    /// Handles user "help" command.
     /// </summary>
     class HelpCommand : Command
     {
-        private const string name = "help";
+        private const string Name = "help";
         private GameManager gameManager;
 
         public HelpCommand(GameManager gameManager)
-            : base(name)
+            : base(Name)
         {
             this.gameManager = gameManager;
         }
 
+        /// <summary>
+        /// Visualise the result of the "help command".
+        /// </summary>
         public override void Execute()
         {
             gameManager.Renderer.WriteLine("The number looks like {0}.", gameManager.BullsAndCowsNumbers[gameManager.CurrentPlayerIndex].GetCheat());

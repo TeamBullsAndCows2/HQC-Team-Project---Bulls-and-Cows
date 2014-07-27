@@ -11,6 +11,11 @@
 
         public int Guesses { get; private set; }
 
+        /// <summary>
+        /// Manages the sores of the players.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Returns the player's name and number of guesses.</returns>
         public static GameScore GetGameScore(string data)
         {
             string[] dataAsStringArray = data.Split(new string[] { "_:::_" }, StringSplitOptions.None);

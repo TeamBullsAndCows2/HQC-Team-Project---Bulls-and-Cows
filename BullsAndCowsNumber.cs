@@ -8,7 +8,7 @@
     using BullsAndCows.Tools;
 
     /// <summary>
-    /// The class generates the random number to be guessed.
+    /// The class handles the generated number guessing and the output from the "help" command.
     /// </summary>
     public class BullsAndCowsNumber
     {

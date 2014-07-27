@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// An interface for the messages to be given to the player.
+    /// </summary>
     public interface IRenderer
     {
         void Write(object message);

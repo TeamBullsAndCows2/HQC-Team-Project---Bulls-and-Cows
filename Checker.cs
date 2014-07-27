@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BullsAndCows
+﻿namespace BullsAndCows
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// The class checks the input number.
+    /// </summary>
     public static class Checker
     {
         public static Result TryToGuess(string numberAsString, ref int guessesCount, int[] number)

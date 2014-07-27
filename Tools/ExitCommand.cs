@@ -7,11 +7,11 @@
     /// </summary>
     class ExitCommand : Command
     {
-        private const string name = "exit";
+        private const string Name = "exit";
         private GameManager gameManager;
 
         public ExitCommand(GameManager gameManager)
-            : base(name)
+            : base(Name)
         {
             this.gameManager = gameManager;
         }

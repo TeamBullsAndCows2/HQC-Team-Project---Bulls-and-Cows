@@ -6,6 +6,9 @@ namespace BullsAndCows.Tools
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// Gets the player's input from the console.
+    /// </summary>
     public class ConsoleInputManager : IInputManager
     {
         public string GetUserInput()

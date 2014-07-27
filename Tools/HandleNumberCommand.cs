@@ -7,16 +7,19 @@
     /// </summary>
     class HandleNumberCommand : Command
     {
-        private const string name = "handleNumberInput";
+        private const string Name = "handleNumberInput";
         private GameManager gameManager;
         private string number;
 
         public HandleNumberCommand(GameManager gameManager)
-            : base(name)
+            : base(Name)
         {
             this.gameManager = gameManager;
         }
 
+        /// <summary>
+        /// Checks if the number is guessed and proceeds as appropriate.
+        /// </summary>
         public override void Execute()
         {
             this.number = gameManager.GetCurrentPlayerInput();

@@ -103,6 +103,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the input of the current player.
+        /// </summary>
         public void HandleUserInput(string playerInput)
         {
             if (BullsAndCowsNumber.IsValidNumber(playerInput))
@@ -120,12 +123,17 @@
             }
         }
 
+        /// <summary>
+        /// This method switches the current player.
+        /// </summary>
         public void NextPlayer()
         {
-            // switch the player
             this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.Count;
         }
 
+        /// <summary>
+        /// Gets the command from the console.
+        /// </summary>
         public void PlayTurn()
         {
             IPlayer currentPlayer = this.GetCurrentPlayer();
@@ -152,7 +160,7 @@
             }
         }
 
-        internal void addPlayer(IPlayer player)
+        internal void AddPlayer(IPlayer player)
         {
             // TODO: IPlayer validation
 
