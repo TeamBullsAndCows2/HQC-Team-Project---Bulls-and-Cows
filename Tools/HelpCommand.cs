@@ -17,7 +17,7 @@
         }
 
         /// <summary>
-        /// Visualise the result of the "help command".
+        /// Visualize the result of the "help command".
         /// </summary>
         public override void Execute()
         {
