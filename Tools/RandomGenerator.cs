@@ -1,7 +1,7 @@
-﻿namespace BullsAndCows.Tools
+﻿namespace BullsAndCows.Common.Tools
 {
     using System;
-    using BullsAndCows.Interfaces;
+    using BullsAndCows.Common.Interfaces;
 
     /// <summary>
     /// Singleton Random generator class.

@@ -1,4 +1,4 @@
-﻿namespace BullsAndCows.Interfaces
+﻿namespace BullsAndCows.Common.Interfaces
 {
     using System;
     using System.Collections.Generic;

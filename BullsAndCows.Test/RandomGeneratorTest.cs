@@ -1,7 +1,7 @@
-﻿namespace BullsAndCows.Test
+﻿namespace BullsAndCows.Common.Test
 {
     using System;
-    using BullsAndCows.Tools;
+    using BullsAndCows.Common.Tools;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>

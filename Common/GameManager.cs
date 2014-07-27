@@ -1,11 +1,11 @@
-﻿namespace BullsAndCows
+﻿namespace BullsAndCows.Common
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using BullsAndCows.Interfaces;
-    using BullsAndCows.Tools;
+    using BullsAndCows.Common.Interfaces;
+    using BullsAndCows.Common.Tools;
 
     /// <summary>
     /// The GameManager class contains the game logic.

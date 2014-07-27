@@ -6,7 +6,7 @@
     <ProjectGuid>{76685DBA-9F48-4D2B-9AEE-BEB5EA8A47E4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BullsAndCows.Test</RootNamespace>
+    <RootNamespace>BullsAndCows.Common.Test</RootNamespace>
     <AssemblyName>BullsAndCows.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

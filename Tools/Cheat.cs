@@ -1,7 +1,7 @@
-﻿namespace BullsAndCows
+﻿namespace BullsAndCows.Common
 {
-    using BullsAndCows.Interfaces;
-    using BullsAndCows.Tools;
+    using BullsAndCows.Common.Interfaces;
+    using BullsAndCows.Common.Tools;
     using System;
     using System.Collections.Generic;
     using System.Linq;

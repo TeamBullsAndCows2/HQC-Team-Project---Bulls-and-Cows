@@ -1,4 +1,4 @@
-﻿namespace BullsAndCows
+﻿namespace BullsAndCows.Common
 {
     using System;
 

@@ -1,4 +1,4 @@
-﻿namespace BullsAndCows.Tools
+﻿namespace BullsAndCows.Common.Tools
 {
     using System;
 
