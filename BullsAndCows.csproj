@@ -75,6 +75,7 @@
     <Compile Include="Tools\TopCommand.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Diagrams\RandomGeneratorSingleton.cd" />
     <None Include="Diagrams\CommadHandlingBuilder.cd" />
   </ItemGroup>
   <ItemGroup>
