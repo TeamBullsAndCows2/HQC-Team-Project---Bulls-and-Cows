@@ -147,15 +147,18 @@
         {
             for (int i = 0; i < this.players.Count; i++)
             {
-                this.bullsAndCowsNumbers[i] = new BullsAndCowsNumber();
+                int[] initialNumber = this.randomGenerator.GenerateRandomFourDigitArray();
+                this.bullsAndCowsNumbers[i] = new BullsAndCowsNumber(initialNumber);
             }
         }
 
         internal void addPlayer(IPlayer player)
         {
             // TODO: IPlayer validation
+
             this.players.Add(player);
-            this.bullsAndCowsNumbers.Add(new BullsAndCowsNumber());
+            int[] initialNumber = this.randomGenerator.GenerateRandomFourDigitArray();
+            this.bullsAndCowsNumbers.Add(new BullsAndCowsNumber(initialNumber));
         }
 
         private ICommandHandler InitializeCommandHandler()

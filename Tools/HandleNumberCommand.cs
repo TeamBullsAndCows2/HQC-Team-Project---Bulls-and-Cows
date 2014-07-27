@@ -54,7 +54,9 @@
                 gameManager.Renderer.Write(gameManager.ScoreBoard);
                 gameManager.Renderer.WriteLine();
                 gameManager.Renderer.WriteLine(GameManager.WelcomeMessage);
-                currentBullsAndCowsNumber = new BullsAndCowsNumber();
+
+                int[] initialNumber = RandomGenerator.Instance.GenerateRandomFourDigitArray();
+                currentBullsAndCowsNumber = new BullsAndCowsNumber(initialNumber);
             }
         }
     }

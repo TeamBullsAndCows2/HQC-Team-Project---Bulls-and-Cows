@@ -8,5 +8,7 @@
     interface IRandomGenerator
     {
         int GetValue(int minValue, int maxValue);
+
+        int[] GenerateRandomFourDigitArray();
     }
 }

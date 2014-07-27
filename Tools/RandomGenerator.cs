@@ -33,5 +33,18 @@
         {
             return this.randomGen.Next(minValue, maxValue + 1);
         }
+
+        public int[] GenerateRandomFourDigitArray()
+        {
+            int[] number = new int[4];
+            number[0] = this.GetValue(1, 9);
+
+            for (int i = 1; i < number.Length; i++)
+            {
+                number[i] = this.GetValue(0, 9);
+            }
+
+            return number;
+        }
     }
 }

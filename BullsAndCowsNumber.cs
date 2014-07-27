@@ -12,17 +12,14 @@
     /// </summary>
     public class BullsAndCowsNumber
     {
-        IRandomGenerator randomGenerator;
         private Cheat cheatNumber;
         private int[] number;
 
-        public BullsAndCowsNumber()
+        public BullsAndCowsNumber(int[] initialNumber)
         {
-            this.randomGenerator = RandomGenerator.Instance;
-            this.number = new int[4];
+            this.number = initialNumber;
             this.cheatNumber = new Cheat(number);
             this.GuessesCount = 0;
-            this.GenerateRandomNumbers();
         }
 
         public int Cheats
@@ -108,16 +105,6 @@
                 this.number[1].GetHashCode() ^
                 this.number[2].GetHashCode() ^
                 this.number[3].GetHashCode();
-        }
-
-        private void GenerateRandomNumbers()
-        {
-            this.number[0] = this.randomGenerator.GetValue(1, 9);
-
-            for (int i = 1; i < this.number.Length; i++)
-            {
-                this.number[i] = this.randomGenerator.GetValue(0, 9);
-            }
         }
     }
 }
