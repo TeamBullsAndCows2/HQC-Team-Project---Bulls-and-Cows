@@ -1,10 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BullsAndCows.Common.Interfaces;
-using BullsAndCows.Common.Tools;
-
-namespace BullsAndCows.Common.Test
+﻿namespace BullsAndCows.Common.Test
 {
+    using System;
+    using BullsAndCows.Common.Interfaces;
+    using BullsAndCows.Common.Tools;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class HelpCommandTest
     {
@@ -27,7 +27,7 @@ namespace BullsAndCows.Common.Test
             helpCmd.Execute();
             int currentBotIndex = gm.CurrentPlayerIndex;
 
-            Assert.AreEqual(beforeExecutionBotIndex, currentBotIndex-1);
+            Assert.AreEqual(beforeExecutionBotIndex, currentBotIndex - 1);
         }
     }
 }

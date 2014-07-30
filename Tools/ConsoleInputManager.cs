@@ -1,10 +1,10 @@
 namespace BullsAndCows.Common.Tools
 {
-    using BullsAndCows.Common.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BullsAndCows.Common.Interfaces;
 
     /// <summary>
     /// Gets the player's input from the console.

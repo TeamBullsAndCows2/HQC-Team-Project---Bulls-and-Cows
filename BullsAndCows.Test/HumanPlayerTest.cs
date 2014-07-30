@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace BullsAndCows.Common.Test
+﻿namespace BullsAndCows.Common.Test
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class HumanPlayerTest
     {
@@ -10,7 +10,7 @@ namespace BullsAndCows.Common.Test
         [ExpectedException(typeof(System.ArgumentNullException))]
         public void TestFailedPlayerCreation()
         {
-            HumanPlayer player = new HumanPlayer("");
+            HumanPlayer player = new HumanPlayer(string.Empty);
         }
 
         [TestMethod]

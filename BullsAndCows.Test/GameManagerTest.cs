@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BullsAndCows.Common.Interfaces;
-using BullsAndCows.Common.Tools;
-using System.Collections.Generic;
-
-namespace BullsAndCows.Common.Test
+﻿namespace BullsAndCows.Common.Test
 {
+    using System;
+    using System.Collections.Generic;
+    using BullsAndCows.Common.Interfaces;
+    using BullsAndCows.Common.Tools;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    
     [TestClass]
     public class GameManagerTest
     {
@@ -16,6 +16,7 @@ namespace BullsAndCows.Common.Test
             IRenderer renderer = new ConsoleRenderer();
             IInputManager inputMeneger = new ConsoleInputManager();
             GameManager gm = new GameManager(renderer, inputMeneger);
+
             // no players added
             gm.PlayTurn();
         }
@@ -38,7 +39,6 @@ namespace BullsAndCows.Common.Test
 
             Assert.AreEqual(allPlayers.Count, 3);
         }
-
 
         [TestMethod]
         public void TestNextPlayer_GetNextPlayerCorrectly()
@@ -75,14 +75,19 @@ namespace BullsAndCows.Common.Test
             IPlayer botPlayer3 = new HumanPlayer("Bot3");
             gm.AddPlayer(botPlayer3);
 
-            int curentBot = gm.CurrentPlayerIndex; //first bot
-            gm.NextPlayer();//second bot
-            gm.NextPlayer();//third bot
-            gm.NextPlayer();//first bot again
+            // first bot
+            int curentBot = gm.CurrentPlayerIndex;
+
+            // second bot
+            gm.NextPlayer();
+
+            // third bot
+            gm.NextPlayer();
+
+            // first bot again
+            gm.NextPlayer(); 
 
             Assert.AreEqual(curentBot, 0);
         }
-
-
     }
 }

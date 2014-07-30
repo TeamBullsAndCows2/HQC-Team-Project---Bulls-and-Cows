@@ -20,7 +20,7 @@ namespace BullsAndCows.Common.Test
         public void TestWrite_WithNewObject()
         {
             IRenderer renderer = new ConsoleRenderer();
-            renderer.Write(new Object());
+            renderer.Write(new object());
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace BullsAndCows.Common.Test
         public void TestWriteLine_WithNewObject()
         {
             IRenderer renderer = new ConsoleRenderer();
-            renderer.WriteLine(new Object());
+            renderer.WriteLine(new object());
         }
 
         [TestMethod]

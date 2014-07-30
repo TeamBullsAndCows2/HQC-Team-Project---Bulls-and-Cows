@@ -22,9 +22,9 @@
         public void CheckForNumberGenerationTest()
         {
             var generator = RandomGenerator.Instance;
-            const int oneNMumber = 1;
+            const int OneNumber = 1;
 
-            Assert.AreEqual(oneNMumber, generator.GetValue(1, 1));
+            Assert.AreEqual(OneNumber, generator.GetValue(1, 1));
         }
 
         [TestMethod]

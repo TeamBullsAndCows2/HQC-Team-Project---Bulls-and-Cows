@@ -9,7 +9,7 @@ namespace BullsAndCows.Common.Test
         [TestMethod]
         public void TestGettingFourCheats()
         {
-            int[] number = new int[] {1, 2, 3, 4};
+            int[] number = new int[] { 1, 2, 3, 4 };
             Cheat cheat = new Cheat(number);
             cheat.GetCheat();
             cheat.GetCheat();

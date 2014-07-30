@@ -61,7 +61,6 @@ namespace BullsAndCows.Common
                         case 3:
                             this.manager.HandleUserInput("exit");
                             return;
-                            break;
                         default:
                             break;
                     }
@@ -102,6 +101,7 @@ namespace BullsAndCows.Common
 
         private void RunGame()
         {
+
             // Show splash screen
             Console.Clear();
             renderer.WriteLine(GameManager.WelcomeMessage);
