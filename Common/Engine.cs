@@ -16,6 +16,9 @@ namespace BullsAndCows.Common
         private IRenderer renderer = new ConsoleRenderer();
         private IInputManager inputManager = new ConsoleInputManager();
 
+        /// <summary>
+        /// Initializes a new instance of Engine class. 
+        /// </summary>
         public Engine()
         {
             this.manager = new GameManager(renderer, inputManager);
@@ -26,17 +29,10 @@ namespace BullsAndCows.Common
         /// </summary>
         public void Start()
         {
-            renderer.Write("Enter name for Player 1: ");
-            string name = inputManager.GetUserInput();
-            IPlayer player = new HumanPlayer(name);
-            this.manager.AddPlayer(player);
+            renderer.Write("Enter the number of players: ");
+            int numberOfPlayers = GetNumberOfPlayers();
+            this.InitializePlayers(numberOfPlayers);
 
-            renderer.Write("Enter name for Player 2: ");
-            string name2 = inputManager.GetUserInput();
-            IPlayer player2 = new HumanPlayer(name2);
-            this.manager.AddPlayer(player2);
-
-            // Show splash screen
             renderer.WriteLine(GameManager.WelcomeMessage);
             renderer.WriteLine();
 
@@ -45,7 +41,32 @@ namespace BullsAndCows.Common
                 this.manager.PlayTurn();
             }
 
-            // Scores
+            // TODO: Scores
+        }
+ 
+        private int GetNumberOfPlayers()
+        {
+            string userInput = inputManager.GetUserInput();
+            int numberOfPlayers = 0;
+
+            bool isValidUserInput = int.TryParse(userInput, out numberOfPlayers);
+            if (!isValidUserInput)
+            {
+                throw new ArgumentException("Invalid users count!");
+            }
+
+            return numberOfPlayers;
+        }
+
+        private void InitializePlayers(int numberOfPlayers)
+        {
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                renderer.Write(string.Format("Enter name for Player {0}: ", i + 1));
+                string name = inputManager.GetUserInput();
+                IPlayer player = new HumanPlayer(name);
+                this.manager.AddPlayer(player);
+            }
         }
     }
 }
