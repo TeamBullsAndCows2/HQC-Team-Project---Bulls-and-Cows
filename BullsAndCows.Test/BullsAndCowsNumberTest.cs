@@ -80,5 +80,11 @@
         {
             Assert.IsFalse(BullsAndCowsNumber.IsValidNumber("word"));
         }
+
+        [TestMethod]
+        public void TestIfNothingIsValidNumber()
+        {
+            Assert.IsFalse(BullsAndCowsNumber.IsValidNumber(""));
+        }
     }
 }

@@ -55,7 +55,7 @@
         /// Handles the user input from the console
         /// </summary>
         /// <param name="keypress">Information about the key that is pressed</param>
-        /// <returns></returns>
+        /// <returns>Returns the picked from the player selection</returns>
         public int HandleUserMenuPick(ConsoleKeyInfo keypress)
         {
             if (keypress.Key == ConsoleKey.DownArrow)
