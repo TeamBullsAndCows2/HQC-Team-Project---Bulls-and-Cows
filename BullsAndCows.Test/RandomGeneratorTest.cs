@@ -26,5 +26,14 @@
 
             Assert.AreEqual(oneNMumber, generator.GetValue(1, 1));
         }
+
+        [TestMethod]
+        public void CheckForArrayGenerationTest()
+        {
+            var generator = RandomGenerator.Instance;
+            int expectedArrayLength = 4;
+            int[] generatedAray = generator.GenerateRandomFourDigitArray();
+            Assert.AreEqual(expectedArrayLength, generatedAray.Length);
+        }
     }
 }
