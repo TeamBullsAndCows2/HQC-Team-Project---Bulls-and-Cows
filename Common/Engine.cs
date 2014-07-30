@@ -100,7 +100,7 @@ namespace BullsAndCows.Common
             }
         }
 
-        public void RunGame()
+        private void RunGame()
         {
             // Show splash screen
             Console.Clear();

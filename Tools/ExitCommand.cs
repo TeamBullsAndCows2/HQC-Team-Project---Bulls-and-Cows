@@ -5,7 +5,7 @@
     /// <summary>
     /// Handles 'exit' user command.
     /// </summary>
-    class ExitCommand : Command
+    public class ExitCommand : Command
     {
         private const string Name = "exit";
         private GameManager gameManager;

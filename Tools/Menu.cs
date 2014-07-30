@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BullsAndCows.Common.Tools
+﻿namespace BullsAndCows.Common.Tools
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// The class displayes the menu and handles the users input on navigation to the menu and has options to return the user's selection of this menu
+    /// </summary>
     public class Menu
     {
         private List<string> menuItems;
@@ -20,6 +23,9 @@ namespace BullsAndCows.Common.Tools
             this.menuItems.Add("Exit");
         }
 
+        /// <summary>
+        /// Display the menu on the console
+        /// </summary>
         public void DisplayMenu()
         {
             Console.Clear();
@@ -36,11 +42,20 @@ namespace BullsAndCows.Common.Tools
             }
         }
 
+        /// <summary>
+        /// Gets the user's selected option
+        /// </summary>
+        /// <returns></returns>
         public int GetUserOption()
         {
             return this.option;
         }
 
+        /// <summary>
+        /// Handles the user input from the console
+        /// </summary>
+        /// <param name="keypress">Information about the key that is pressed</param>
+        /// <returns></returns>
         public int HandleUserMenuPick(ConsoleKeyInfo keypress)
         {
             if (keypress.Key == ConsoleKey.DownArrow)

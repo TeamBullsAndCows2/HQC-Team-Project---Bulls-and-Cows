@@ -160,7 +160,7 @@
             }
         }
 
-        internal void AddPlayer(IPlayer player)
+        public void AddPlayer(IPlayer player)
         {
             // TODO: IPlayer validation
 

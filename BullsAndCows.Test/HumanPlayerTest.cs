@@ -12,5 +12,12 @@ namespace BullsAndCows.Common.Test
         {
             HumanPlayer player = new HumanPlayer("");
         }
+
+        [TestMethod]
+        public void TestSuccessPlayerCreation()
+        {
+            HumanPlayer player = new HumanPlayer("Pesho");
+            Assert.AreEqual(player.Name, "Pesho");
+        }
     }
 }

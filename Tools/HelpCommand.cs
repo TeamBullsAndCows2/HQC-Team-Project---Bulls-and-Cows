@@ -5,7 +5,7 @@
     /// <summary>
     /// Handles user "help" command.
     /// </summary>
-    class HelpCommand : Command
+    public class HelpCommand : Command
     {
         private const string Name = "help";
         private GameManager gameManager;
