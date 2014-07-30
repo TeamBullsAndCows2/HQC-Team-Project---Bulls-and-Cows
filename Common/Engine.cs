@@ -29,16 +29,47 @@ namespace BullsAndCows.Common
         /// </summary>
         public void Start()
         {
-            renderer.Write("Enter the number of players: ");
-            int numberOfPlayers = GetNumberOfPlayers();
-            this.InitializePlayers(numberOfPlayers);
-
-            renderer.WriteLine(GameManager.WelcomeMessage);
-            renderer.WriteLine();
-
-            while (this.manager.IsRunning)
+            Menu menu = new Menu();
+            menu.DisplayMenu();
+            ConsoleKeyInfo keypress;
+            while (true)
             {
-                this.manager.PlayTurn();
+                if (this.manager.IsRunning)
+                {
+                    keypress = Console.ReadKey(true);
+                    int option = menu.HandleUserMenuPick(keypress);
+                    switch (option)
+                    {
+                        case 0:
+                            renderer.Write("Enter player name: ");
+                            string playerName = inputManager.GetUserInput();
+                            IPlayer player = new HumanPlayer(playerName);
+
+                            this.manager.AddPlayer(player);
+                            RunGame();
+                            break;
+                        case 1:
+                            renderer.Write("Enter the number of players: ");
+                            int numberOfPlayers = GetNumberOfPlayers();
+                            this.InitializePlayers(numberOfPlayers);
+                            RunGame();
+                            break;
+
+                        case 2:
+                            this.manager.HandleUserInput("top");
+                            break;
+                        case 3:
+                            this.manager.HandleUserInput("exit");
+                            return;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
             }
 
             // TODO: Scores
@@ -66,6 +97,18 @@ namespace BullsAndCows.Common
                 string name = inputManager.GetUserInput();
                 IPlayer player = new HumanPlayer(name);
                 this.manager.AddPlayer(player);
+            }
+        }
+
+        public void RunGame()
+        {
+            // Show splash screen
+            Console.Clear();
+            renderer.WriteLine(GameManager.WelcomeMessage);
+            renderer.WriteLine();
+            while (this.manager.IsRunning)
+            {
+                this.manager.PlayTurn();
             }
         }
     }
