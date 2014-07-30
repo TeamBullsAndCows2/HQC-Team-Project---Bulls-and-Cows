@@ -1,8 +1,8 @@
 ﻿namespace BullsAndCows.Common.Tools
 {
-    using BullsAndCows.Common.Interfaces;
     using System;
     using System.Collections.Generic;
+    using BullsAndCows.Common.Interfaces;
 
     /// <summary>
     /// Responsible for executing all commands in the game manager. Implemented via Bridge pattern together with the Command abstract class.

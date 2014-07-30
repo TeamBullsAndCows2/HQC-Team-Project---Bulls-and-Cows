@@ -2,10 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
-    using System.IO;
-
+    
     /// <summary>
     /// The class represents the scoreboard - highscores by players.
     /// </summary>
@@ -15,16 +15,16 @@
         private readonly SortedSet<GameScore> scores;
         private string filename;
 
-        public string Filename
-        {
-            get { return this.filename; }
-            set { this.filename = value; }
-        }
-
         public ScoreBoard(string filename)
         {
             this.Filename = filename;
             this.scores = LoadScoresFromFile(this.Filename);
+        }
+
+        public string Filename
+        {
+            get { return this.filename; }
+            set { this.filename = value; }
         }
 
         /// <summary>

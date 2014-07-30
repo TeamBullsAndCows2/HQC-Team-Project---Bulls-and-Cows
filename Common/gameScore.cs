@@ -7,6 +7,12 @@
     /// </summary>
     public class GameScore : IComparable
     {
+        public GameScore(string name, int guesses)
+        {
+            this.Name = name;
+            this.Guesses = guesses;
+        }
+
         public string Name { get; private set; }
 
         public int Guesses { get; private set; }
@@ -32,12 +38,6 @@
             int.TryParse(dataAsStringArray[1], out guesses);
 
             return new GameScore(name, guesses);
-        }
-
-        public GameScore(string name, int guesses)
-        {
-            this.Name = name;
-            this.Guesses = guesses;
         }
 
         public override bool Equals(object obj)

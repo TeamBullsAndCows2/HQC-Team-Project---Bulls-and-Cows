@@ -1,18 +1,18 @@
 ﻿namespace BullsAndCows.Common.Tools
 {
     using System;
-    using BullsAndCows.Common.Interfaces;
     using System.Linq;
-
+    using BullsAndCows.Common.Interfaces;
+    
     /// <summary>
     /// Singleton Random generator class.
     /// </summary>
     public sealed class RandomGenerator : IRandomGenerator
     {
+        private const int UpperBound = 9;
         private static readonly RandomGenerator instance = new RandomGenerator();
         private readonly Random randomGen;
-        private const int UpperBound = 9;
-
+        
         private RandomGenerator()
         {
             this.randomGen = new Random();

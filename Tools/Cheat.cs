@@ -1,11 +1,11 @@
 ﻿namespace BullsAndCows.Common
 {
-    using BullsAndCows.Common.Interfaces;
-    using BullsAndCows.Common.Tools;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BullsAndCows.Common.Interfaces;
+    using BullsAndCows.Common.Tools;
     
     /// <summary>
     /// A class for the "help", its display and cheat counts. 

@@ -163,7 +163,6 @@
         public void AddPlayer(IPlayer player)
         {
             // TODO: IPlayer validation
-
             this.players.Add(player);
             int[] initialNumber = this.randomGenerator.GenerateRandomFourDigitArray();
             this.bullsAndCowsNumbers.Add(new BullsAndCowsNumber(initialNumber));

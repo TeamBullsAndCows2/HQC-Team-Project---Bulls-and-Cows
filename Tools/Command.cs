@@ -1,7 +1,7 @@
 ﻿namespace BullsAndCows.Common.Tools
 {
-    using BullsAndCows.Common.Interfaces;
     using System;
+    using BullsAndCows.Common.Interfaces;
 
     /// <summary>
     /// Base Command class. All commands should implement it. Implemented using bridge design pattern together with CommandHandler.

@@ -41,18 +41,18 @@ namespace BullsAndCows.Common
                     switch (option)
                     {
                         case 0:
-                            renderer.Write("Enter player name: ");
+                            this.renderer.Write("Enter player name: ");
                             string playerName = inputManager.GetUserInput();
                             IPlayer player = new HumanPlayer(playerName);
 
                             this.manager.AddPlayer(player);
-                            RunGame();
+                            this.RunGame();
                             break;
                         case 1:
-                            renderer.Write("Enter the number of players: ");
+                            this.renderer.Write("Enter the number of players: ");
                             int numberOfPlayers = GetNumberOfPlayers();
                             this.InitializePlayers(numberOfPlayers);
-                            RunGame();
+                            this.RunGame();
                             break;
 
                         case 2:
@@ -101,7 +101,6 @@ namespace BullsAndCows.Common
 
         private void RunGame()
         {
-
             // Show splash screen
             Console.Clear();
             renderer.WriteLine(GameManager.WelcomeMessage);

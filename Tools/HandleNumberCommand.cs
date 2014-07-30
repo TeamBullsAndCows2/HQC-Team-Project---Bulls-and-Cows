@@ -5,7 +5,7 @@
     /// <summary>
     /// Handles user input command when user inputs a valid number.
     /// </summary>
-    class HandleNumberCommand : Command
+    public class HandleNumberCommand : Command
     {
         private const string Name = "handleNumberInput";
         private GameManager gameManager;

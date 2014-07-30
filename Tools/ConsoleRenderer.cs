@@ -1,8 +1,8 @@
 ﻿namespace BullsAndCows.Common.Tools
 {
-    using BullsAndCows.Common.Interfaces;
     using System;
-
+    using BullsAndCows.Common.Interfaces;
+    
     /// <summary>
     /// Displays the game messages on the console.
     /// </summary>

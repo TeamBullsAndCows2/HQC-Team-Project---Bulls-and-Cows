@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace BullsAndCows.Common.Test
+﻿namespace BullsAndCows.Common.Test
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class CheckerTest
     {
@@ -11,7 +11,7 @@ namespace BullsAndCows.Common.Test
         public void TestArgumentException()
         {
             int guesses = 0;
-            Checker.TryToGuess("123", ref guesses, new int[] {1, 2, 3, 4});
+            Checker.TryToGuess("123", ref guesses, new int[] { 1, 2, 3, 4 });
         }
 
         [TestMethod]

@@ -18,8 +18,8 @@
 
         public override void Execute()
         {
-            gameManager.IsRunning = false;
-            gameManager.Renderer.WriteLine(GameManager.GoodBuyMessage);
+            this.gameManager.IsRunning = false;
+            this.gameManager.Renderer.WriteLine(GameManager.GoodBuyMessage);
         }
     }
 }

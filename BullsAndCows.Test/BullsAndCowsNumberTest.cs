@@ -10,7 +10,7 @@
         [TestMethod]
         public void TestGuessing()
         {
-            BullsAndCowsNumber number = new BullsAndCowsNumber(new int[] {1, 2, 3, 4});
+            BullsAndCowsNumber number = new BullsAndCowsNumber(new int[] { 1, 2, 3, 4 });
             Result result = number.TryToGuess("1234");
 
             Assert.AreEqual(result.Bulls, 4);
@@ -84,7 +84,7 @@
         [TestMethod]
         public void TestIfNothingIsValidNumber()
         {
-            Assert.IsFalse(BullsAndCowsNumber.IsValidNumber(""));
+            Assert.IsFalse(BullsAndCowsNumber.IsValidNumber(string.Empty));
         }
     }
 }

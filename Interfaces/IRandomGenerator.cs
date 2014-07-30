@@ -5,7 +5,7 @@
     /// <summary>
     /// This is the interface for the random number generator.
     /// </summary>
-    interface IRandomGenerator
+    public interface IRandomGenerator
     {
         /// <summary>
         /// An interface for the creation of a random number.

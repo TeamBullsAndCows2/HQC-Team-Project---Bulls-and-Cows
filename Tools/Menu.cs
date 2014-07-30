@@ -10,8 +10,8 @@
     /// </summary>
     public class Menu
     {
-        private List<string> menuItems;
         private readonly char userPointer = '>';
+        private List<string> menuItems;
         private int option = 0;
 
         public Menu()
@@ -68,6 +68,7 @@
                 {
                     this.option++;
                 }
+
                 this.DisplayMenu();
             }
             else if (keypress.Key == ConsoleKey.UpArrow)
@@ -80,6 +81,7 @@
                 {
                     this.option--;
                 }
+
                 this.DisplayMenu();
             }
             else if (keypress.Key == ConsoleKey.Enter || keypress.Key == ConsoleKey.Spacebar)
