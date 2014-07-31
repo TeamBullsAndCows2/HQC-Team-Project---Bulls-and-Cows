@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BullsAndCowsNumber.cs" />
-    <Compile Include="Tools\Cheat.cs" />
+    <Compile Include="Common\Cheat.cs" />
     <Compile Include="Tools\Checker.cs" />
     <Compile Include="Common\Engine.cs" />
     <Compile Include="Common\GameScore.cs" />
