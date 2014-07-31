@@ -1,10 +1,13 @@
 ﻿namespace BullsAndCows.Common
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// The class deals with the players' scores and their rating .
     /// </summary>
+
+    [ExcludeFromCodeCoverage]
     public class GameScore : IComparable
     {
         public GameScore(string name, int guesses)

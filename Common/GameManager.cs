@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text;
     using BullsAndCows.Common.Interfaces;
@@ -12,7 +11,6 @@
     /// The GameManager class contains the game logic.
     /// </summary>
 
-    [ExcludeFromCodeCoverage]
     public class GameManager
     {
         public const string ScoresFile = "scores.txt";

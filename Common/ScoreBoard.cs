@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -9,6 +10,8 @@
     /// <summary>
     /// The class represents the scoreboard - highscores by players.
     /// </summary>
+
+    [ExcludeFromCodeCoverage]
     public class ScoreBoard
     {
         private const int MaxPlayersToShow = 10;
