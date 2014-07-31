@@ -4,12 +4,15 @@ namespace BullsAndCows.Common
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using BullsAndCows.Common.Interfaces;
     using BullsAndCows.Common.Tools;
   
     /// <summary>
     /// The Engine runs the game, relying on the GameManager.
-    /// </summary>
+    /// </summary> 
+
+    [ExcludeFromCodeCoverage]
     public class Engine
     {
         private readonly GameManager manager;
